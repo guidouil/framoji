@@ -1,54 +1,52 @@
 <script>
-  export let emoji = '🖼️';
-	export let message = 'The message';
-	export let width = 12;
-	$: marge = (width)/2 >= (message.length*0.5) ? Math.round(((width) - message.length*0.5)/2) : 1;
+  export let emoji = "🖼️";
+  export let message = "The message";
+  export let width = 10;
+  $: marge =
+    width - 2 / 2 >= message.length * 0.33
+      ? Math.round((width - 2 - message.length * 0.33) / 2)
+      : 1;
 </script>
 
-
 <div class="main">
-	<h1>Framoji! {emoji}</h1>
-	<label for="emoji">Emoji</label>
-	<input type="text" bind:value={emoji} placeholder="Frame emoji" id="emoji" />
-	<br/>
-	<label for="message">Message</label>
-	<input type="text" bind:value={message} placeholder="Message inside frame" i />
+  <div class="hero min-h-screen bg-base-200">
+    <div class="text-center hero-content">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold">Framoji! {emoji}</h1>
+        <p>Put some text inside an emoji frame</p>
+        <hr />
+        <label for="emoji">Emoji</label>
+        <input
+          type="text"
+          bind:value={emoji}
+          placeholder="Frame emoji"
+          id="emoji"
+          class="input input-bordered input-lg w-full max-w-xs"
+        />
+        <br />
+        <label for="message">Message</label>
+        <input
+          type="text"
+          bind:value={message}
+          placeholder="Message inside frame"
+          class="input input-bordered input-lg w-full max-w-xs"
+        />
+        <hr />
 
-	<hr />
-
-	{#if emoji && width}
-	<pre>
+        {#if emoji && width}
+          <pre>
 {#each Array(width) as _, i}
-{emoji}
-{/each}
-{emoji}{#each Array(width-2) as _}◻️{/each}{emoji}
+              {emoji}
+            {/each}
+{emoji}{#each Array(width - 2) as _}◻️{/each}{emoji}
 {emoji}{#each Array(marge) as _}◻️{/each}{message}{#each Array(marge) as _}◻️{/each}{emoji}
-{emoji}{#each Array(width-2) as _}◻️{/each}{emoji}
+{emoji}{#each Array(width - 2) as _}◻️{/each}{emoji}
 {#each Array(width) as _}
-{emoji}
-{/each}
-	</pre>
-	{/if}
+              {emoji}
+            {/each}
+        </pre>
+        {/if}
+      </div>
+    </div>
+  </div>
 </div>
-
-<style>
-	.main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		.main {
-			max-width: none;
-		}
-	}
-</style>
