@@ -7,7 +7,7 @@
 
 
 <div class="main">
-	<h1>Framoji! {marge}</h1>
+	<h1>Framoji! {emoji}</h1>
 	<label for="emoji">Emoji</label>
 	<input type="text" bind:value={emoji} placeholder="Frame emoji" id="emoji" />
 	<br/>
