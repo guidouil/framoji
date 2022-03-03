@@ -1,10 +1,28 @@
 <script>
   const copy = require("clipboard-copy");
 
-  let emoji = "🌼";
+  let emoji = "🍔";
   let bg = "⬜";
-  let lines = ["The message"];
-  let width = 10;
+  let message = "I Can Has Cheezburger?";
+  let width = 9;
+
+  const makeLines = (message, width) => {
+    let lines = [];
+    const wordsPerLine = Math.round(width / 3);
+    const words = message.split(" ");
+    if (words && words.length > 0) {
+      let line = "";
+      words.forEach((word, index) => {
+        line += `${word} `;
+        if ((index + 1) % wordsPerLine === 0 || index === words.length - 1) {
+          lines.push(line.trim());
+          line = "";
+        }
+      });
+    }
+    return lines;
+  };
+  $: lines = makeLines(message, width);
 
   $: result = () => {
     let border = "";
@@ -59,14 +77,12 @@
           class="input input-bordered input-lg w-full max-w-xs"
         />
         <label class="label" for="message">Message</label>
-        {#each lines as line, i}
-          <input
-            type="text"
-            bind:value={line}
-            placeholder="Message inside frame"
-            class="input input-bordered input-lg w-full max-w-xs"
-          />
-        {/each}
+        <textarea
+          class="textarea input-lg w-full max-w-xs"
+          type="text"
+          bind:value={message}
+          placeholder="Message inside frame"
+        />
 
         <label class="label" for="result">Result</label>
         <textarea
