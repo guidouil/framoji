@@ -134,11 +134,9 @@
         />
         <label class="label" for="message">Message</label>
         <textarea
-          class="textarea input-md w-full max-w-xs"
-          type="text"
+          class="textarea w-full max-w-xs"
           bind:value={message}
-          placeholder="Message inside frame"
-          rows="2"
+          rows={Math.round(lines.length / 2)}
         />
 
         <label class="label" for="result">Result</label>
@@ -146,7 +144,7 @@
           class="textarea textarea-primary"
           name="result"
           id="result"
-          rows="6"
+          rows={lines.length + 4}
           cols={width * 2.6}
           value={result()}
         />
