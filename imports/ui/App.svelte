@@ -3,7 +3,7 @@
 
   let emoji = "🌼";
   let bg = "⬜";
-  let line = "The message";
+  let lines = ["The message"];
   let width = 10;
 
   $: result = () => {
@@ -20,18 +20,18 @@
       }
     }
     let framedLines = "";
-    const margeCount = Math.floor((width - 2 - line.length / 2.5) / 2);
-    let marge = "";
-    if (margeCount > 0) {
-      for (let i = 0; i < margeCount; i += 1) {
-        marge += bg;
-      }
+    if (lines && lines.length > 0) {
+      lines.forEach((line) => {
+        const margeCount = Math.floor((width - 2 - line.length / 2.5) / 2);
+        let marge = "";
+        if (margeCount > 0) {
+          for (let i = 0; i < margeCount; i += 1) {
+            marge += bg;
+          }
+        }
+        framedLines += `\n${emoji}${marge}${line}${marge}${emoji}`;
+      });
     }
-    framedLines += `\n${emoji}${marge}${line}${marge}${emoji}`;
-    // if (lines && lines.length > 0) {
-    //   lines.forEach((line) => {
-    //   });
-    // }
     return `${border}${margin}${framedLines}${margin}\n${border}`;
   };
 </script>
@@ -52,14 +52,14 @@
           class="input input-bordered input-lg w-full max-w-xs"
         />
         <label class="label" for="message">Message</label>
-        <!-- {#each lines as line, i} -->
-        <input
-          type="text"
-          bind:value={line}
-          placeholder="Message inside frame"
-          class="input input-bordered input-lg w-full max-w-xs"
-        />
-        <!-- {/each} -->
+        {#each lines as line, i}
+          <input
+            type="text"
+            bind:value={line}
+            placeholder="Message inside frame"
+            class="input input-bordered input-lg w-full max-w-xs"
+          />
+        {/each}
 
         <label class="label" for="result">Result</label>
         <textarea
@@ -94,6 +94,13 @@
           class="range range-accent"
           id="width"
         />
+
+        <div class="divider" />
+        <p class="text-center">
+          <a href="https://github.com/guidouil/framoji" target="_blank">
+            GitHub
+          </a>
+        </p>
       </div>
     </div>
   </div>
