@@ -44,6 +44,13 @@
       message:
         "Life is like riding a bicycle. To keep your balance, you must keep moving.",
     },
+    { emoji: "🤪", message: "Stupid is as stupid does." },
+    {
+      emoji: "🖖",
+      message:
+        "Computers make excellent and efficient servants, but I have no wish to serve under them.",
+    },
+    { emoji: "🦖", message: "Do You Think He Saurus?" },
   ];
   const randomIndex = Math.floor(Math.random() * inspirations.length);
   let { emoji, message } = inspirations[randomIndex];
@@ -140,7 +147,7 @@
     <div class="hero-content">
       <div class="max-w-md">
         <h1 class="text-center text-5xl font-bold">Framoji {emoji}</h1>
-        <p class="text-center">Put some lines inside an emoji frame</p>
+        <p class="text-center">Write inside an emoji frame.</p>
         <div class="divider" />
         <label class="label" for="emoji">Emoji</label>
         <input
