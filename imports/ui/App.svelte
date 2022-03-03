@@ -1,10 +1,51 @@
 <script>
   const copy = require("clipboard-copy");
 
-  let emoji = "🖼️";
-  let bg = "⬜";
-  let message = "This is a test, please keep scrolling.";
+  const inspirations = [
+    {
+      emoji: "🖼️",
+      message: "This is a test. Keep on scrolling as natural as possible.",
+    },
+    { emoji: "🍔", message: "I Can Has Cheezburger?" },
+    { emoji: "🌼", message: "Flower Power" },
+    { emoji: "🍎", message: "An emoji a day keep the clouds away" },
+    { emoji: "🚀", message: "This is not rocket science" },
+    {
+      emoji: "🤔",
+      message:
+        "Some men see things as they are and ask, Why? I dream things that never were and ask, Why not?",
+    },
+    { emoji: "🟨", message: "I need more sticky notes" },
+    { emoji: "🐈", message: "The Internet is made of cats" },
+    { emoji: "🟪", message: "May the force be with you" },
+    { emoji: "🟩", message: "Green is my favorite color" },
+    { emoji: "🌹", message: "Roses are red, Violets are blue." },
+    { emoji: "❤️️", message: "Hold On, If Love Is The Answer Your Home." },
+  ];
+  const randomIndex = Math.floor(Math.random() * inspirations.length);
+  let { emoji, message } = inspirations[randomIndex];
+
+  const backgrounds = [
+    "⬜",
+    "⬛️",
+    "◼️",
+    "🔲",
+    "◻️",
+    "◽",
+    "◾",
+    "🟨",
+    "🟪",
+    "🟧",
+    "🟩",
+    "🟫",
+    "🟦",
+    "🟥",
+  ];
+  const randomBgIndex = Math.floor(Math.random() * backgrounds.length);
+  let bg = backgrounds[randomBgIndex];
+
   let width = 9;
+  let showMargin = true;
 
   const makeLines = (message, width) => {
     let lines = [];
@@ -64,7 +105,10 @@
         framedLines += `\n${emoji}${leftMarge}${line}${rightMarge}${emoji}`;
       });
     }
-    return `${border}${margin}${framedLines}${margin}\n${border}`;
+    if (showMargin) {
+      return `${border}${margin}${framedLines}${margin}\n${border}`;
+    }
+    return `${border}${framedLines}\n${border}`;
   };
 </script>
 
@@ -108,6 +152,12 @@
 
         <div class="divider" />
         <h2 class="text-2xl font-bold">Settings</h2>
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <input type="checkbox" class="toggle" bind:checked={showMargin} />
+            <span class="label-text">Top and bottom margin</span>
+          </label>
+        </div>
         <label class="label" for="bg">Background Emoji</label>
         <input
           type="text"
@@ -126,6 +176,7 @@
           id="width"
         />
 
+        <p class="text-center">Reload for inspiration...</p>
         <div class="divider" />
         <p class="text-center">
           <a href="https://github.com/guidouil/framoji" target="_blank">
