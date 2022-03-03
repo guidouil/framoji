@@ -19,13 +19,31 @@
     { emoji: "🐈", message: "The Internet is made of cats" },
     { emoji: "🟪", message: "May the force be with you" },
     { emoji: "🟩", message: "Green is my favorite color" },
-    { emoji: "🌹", message: "Roses are red, Violets are blue." },
+    {
+      emoji: "🌹",
+      message: "Roses are red, Violets are blue. I like rain, got no clue.",
+    },
     { emoji: "❤️️", message: "Hold On, If Love Is The Answer Your Home." },
     {
       emoji: "🧐",
-      message: "I don't always use emojis, but when I do it's the frame.",
+      message: "I don't always use emojis, but when I do it's Framoji.",
     },
     { emoji: "🇺🇦", message: "Not only thoughts and prayers" },
+    {
+      emoji: "☁️",
+      message: "There is no cloud, it's just someone else's computer",
+    },
+    { emoji: "🤖", message: "I'm sorry, Dave. I'm afraid I can't do that." },
+    {
+      emoji: "💍",
+      message:
+        "One Ring to rule them all, One Ring to find them, One Ring to bring them allu and in the darkness bind them.",
+    },
+    {
+      emoji: "🚲",
+      message:
+        "Life is like riding a bicycle. To keep your balance, you must keep moving.",
+    },
   ];
   const randomIndex = Math.floor(Math.random() * inspirations.length);
   let { emoji, message } = inspirations[randomIndex];
@@ -33,10 +51,10 @@
   const backgrounds = [
     "⬜",
     "⬛️",
-    "◼️",
     "🔲",
     "◻️",
     "◽",
+    "◼️",
     "◾",
     "🟨",
     "🟪",
@@ -145,7 +163,7 @@
           name="result"
           id="result"
           rows={lines.length + 4}
-          cols={width * 2.6}
+          cols={width * 2.7}
           value={result()}
         />
         <br />
