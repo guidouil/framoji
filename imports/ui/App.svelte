@@ -1,11 +1,37 @@
 <script>
-  export let emoji = "🖼️";
-  export let message = "The message";
-  export let width = 10;
-  $: marge =
-    width - 2 / 2 >= message.length * 0.33
-      ? Math.round((width - 2 - message.length * 0.33) / 2)
-      : 1;
+  let emoji = "🌼";
+  let bg = "⬜";
+  let line = "The message";
+  let width = 10;
+
+  $: result = () => {
+    let border = "";
+    for (let i = 0; i < width; i += 1) {
+      border += emoji;
+    }
+    let margin = "\n";
+    for (let i = 0; i < width; i += 1) {
+      if (i === 0 || i === width - 1) {
+        margin += emoji;
+      } else {
+        margin += bg;
+      }
+    }
+    let framedLines = "";
+    const margeCount = Math.floor((width - 2 - line.length / 2.5) / 2);
+    let marge = "";
+    if (margeCount > 0) {
+      for (let i = 0; i < margeCount; i += 1) {
+        marge += bg;
+      }
+    }
+    framedLines += `\n${emoji}${marge}${line}${marge}${emoji}`;
+    // if (lines && lines.length > 0) {
+    //   lines.forEach((line) => {
+    //   });
+    // }
+    return `${border}${margin}${framedLines}${margin}\n${border}`;
+  };
 </script>
 
 <div class="main">
@@ -13,8 +39,10 @@
     <div class="text-center hero-content">
       <div class="max-w-md">
         <h1 class="text-5xl font-bold">Framoji! {emoji}</h1>
-        <p>Put some text inside an emoji frame</p>
+        <p>Put some lines inside an emoji frame</p>
         <hr />
+        <br />
+
         <label for="emoji">Emoji</label>
         <input
           type="text"
@@ -25,27 +53,28 @@
         />
         <br />
         <label for="message">Message</label>
+        <!-- {#each lines as line, i} -->
         <input
           type="text"
-          bind:value={message}
+          bind:value={line}
           placeholder="Message inside frame"
           class="input input-bordered input-lg w-full max-w-xs"
         />
+        <br />
+        <!-- {/each} -->
+        <br />
         <hr />
-
-        {#if emoji && width}
-          <pre>
-{#each Array(width) as _, i}
-              {emoji}
-            {/each}
-{emoji}{#each Array(width - 2) as _}◻️{/each}{emoji}
-{emoji}{#each Array(marge) as _}◻️{/each}{message}{#each Array(marge) as _}◻️{/each}{emoji}
-{emoji}{#each Array(width - 2) as _}◻️{/each}{emoji}
-{#each Array(width) as _}
-              {emoji}
-            {/each}
-        </pre>
-        {/if}
+        <br />
+        <label for="result">Result</label>
+        <br />
+        <textarea
+          class="textarea textarea-primary"
+          name="result"
+          id="result"
+          rows="6"
+          cols="25"
+          value={result()}
+        />
       </div>
     </div>
   </div>
