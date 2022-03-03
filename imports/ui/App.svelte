@@ -54,7 +54,7 @@
 
   const makeLines = (message, width) => {
     let lines = [];
-    const wordsPerLine = Math.round(width / 3);
+    const wordsPerLine = Math.round((width - 2) / 3);
     const words = message.split(" ");
     if (words && words.length > 0) {
       // join short words
@@ -93,14 +93,14 @@
     let framedLines = "";
     if (lines && lines.length > 0) {
       lines.forEach((line) => {
-        const leftMargeCount = Math.floor((width - 2 - line.length / 2.5) / 2);
+        const leftMargeCount = Math.floor((width - 2 - line.length / 3) / 2);
         let leftMarge = "";
         if (leftMargeCount > 0) {
           for (let i = 0; i < leftMargeCount; i += 1) {
             leftMarge += bg;
           }
         }
-        const rightMargeCount = Math.round((width - 2 - line.length / 2.5) / 2);
+        const rightMargeCount = Math.round((width - 2 - line.length / 3) / 2);
         let rightMarge = "";
         if (rightMargeCount > 0) {
           for (let i = 0; i < rightMargeCount; i += 1) {
