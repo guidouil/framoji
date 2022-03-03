@@ -22,14 +22,21 @@
     let framedLines = "";
     if (lines && lines.length > 0) {
       lines.forEach((line) => {
-        const margeCount = Math.floor((width - 2 - line.length / 2.5) / 2);
-        let marge = "";
-        if (margeCount > 0) {
-          for (let i = 0; i < margeCount; i += 1) {
-            marge += bg;
+        const leftMargeCount = Math.floor((width - 2 - line.length / 2.5) / 2);
+        let leftMarge = "";
+        if (leftMargeCount > 0) {
+          for (let i = 0; i < leftMargeCount; i += 1) {
+            leftMarge += bg;
           }
         }
-        framedLines += `\n${emoji}${marge}${line}${marge}${emoji}`;
+        const rightMargeCount = Math.round((width - 2 - line.length / 2.5) / 2);
+        let rightMarge = "";
+        if (rightMargeCount > 0) {
+          for (let i = 0; i < rightMargeCount; i += 1) {
+            rightMarge += bg;
+          }
+        }
+        framedLines += `\n${emoji}${leftMarge}${line}${rightMarge}${emoji}`;
       });
     }
     return `${border}${margin}${framedLines}${margin}\n${border}`;
@@ -40,7 +47,7 @@
   <div class="hero min-h-screen bg-base-200">
     <div class="hero-content">
       <div class="max-w-md">
-        <h1 class="text-center text-5xl font-bold">Framoji! {emoji}</h1>
+        <h1 class="text-center text-5xl font-bold">Framoji {emoji}</h1>
         <p class="text-center">Put some lines inside an emoji frame</p>
         <div class="divider" />
         <label class="label" for="emoji">Emoji</label>
