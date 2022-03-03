@@ -21,6 +21,11 @@
     { emoji: "🟩", message: "Green is my favorite color" },
     { emoji: "🌹", message: "Roses are red, Violets are blue." },
     { emoji: "❤️️", message: "Hold On, If Love Is The Answer Your Home." },
+    {
+      emoji: "🧐",
+      message: "I don't always use emojis, but when I do it's the frame.",
+    },
+    { emoji: "🇺🇦", message: "Not only thoughts and prayers" },
   ];
   const randomIndex = Math.floor(Math.random() * inspirations.length);
   let { emoji, message } = inspirations[randomIndex];
