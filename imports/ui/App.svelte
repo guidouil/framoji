@@ -38,10 +38,10 @@
 
 <div class="main">
   <div class="hero min-h-screen bg-base-200">
-    <div class="text-center hero-content">
+    <div class="hero-content">
       <div class="max-w-md">
-        <h1 class="text-5xl font-bold">Framoji! {emoji}</h1>
-        <p>Put some lines inside an emoji frame</p>
+        <h1 class="text-center text-5xl font-bold">Framoji! {emoji}</h1>
+        <p class="text-center">Put some lines inside an emoji frame</p>
         <div class="divider" />
         <label class="label" for="emoji">Emoji</label>
         <input
@@ -67,7 +67,7 @@
           name="result"
           id="result"
           rows="6"
-          cols={width * 2.4}
+          cols={width * 2.6}
           value={result()}
         />
         <br />
