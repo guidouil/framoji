@@ -1,9 +1,9 @@
 <script>
   const copy = require("clipboard-copy");
 
-  let emoji = "🍔";
+  let emoji = "🖼️";
   let bg = "⬜";
-  let message = "I Can Has Cheezburger?";
+  let message = "This is a test, please keep scrolling.";
   let width = 9;
 
   const makeLines = (message, width) => {
@@ -11,6 +11,13 @@
     const wordsPerLine = Math.round(width / 3);
     const words = message.split(" ");
     if (words && words.length > 0) {
+      // join short words
+      words.forEach((word, i) => {
+        if (word.length <= 2 && words[i + 1] && words[i + 1].length <= 2) {
+          words[i] += ` ${words[i + 1]}`;
+          words.splice(i + 1, 1);
+        }
+      });
       let line = "";
       words.forEach((word, index) => {
         line += `${word} `;
@@ -78,10 +85,11 @@
         />
         <label class="label" for="message">Message</label>
         <textarea
-          class="textarea input-lg w-full max-w-xs"
+          class="textarea input-md w-full max-w-xs"
           type="text"
           bind:value={message}
           placeholder="Message inside frame"
+          rows="2"
         />
 
         <label class="label" for="result">Result</label>
@@ -111,7 +119,7 @@
         <label class="label" for="width">Width ({width})</label>
         <input
           type="range"
-          min="7"
+          min="4"
           max="42"
           bind:value={width}
           class="range range-accent"
