@@ -1,4 +1,6 @@
 <script>
+  const copy = require("clipboard-copy");
+
   let emoji = "🌼";
   let bg = "⬜";
   let line = "The message";
@@ -75,6 +77,10 @@
           cols="25"
           value={result()}
         />
+        <br />
+        <button class="btn btn-primary" on:click={copy(result())}>
+          Copy result
+        </button>
       </div>
     </div>
   </div>
