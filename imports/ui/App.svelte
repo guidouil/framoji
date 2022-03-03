@@ -42,10 +42,8 @@
       <div class="max-w-md">
         <h1 class="text-5xl font-bold">Framoji! {emoji}</h1>
         <p>Put some lines inside an emoji frame</p>
-        <hr />
-        <br />
-
-        <label for="emoji">Emoji</label>
+        <div class="divider" />
+        <label class="label" for="emoji">Emoji</label>
         <input
           type="text"
           bind:value={emoji}
@@ -53,8 +51,7 @@
           id="emoji"
           class="input input-bordered input-lg w-full max-w-xs"
         />
-        <br />
-        <label for="message">Message</label>
+        <label class="label" for="message">Message</label>
         <!-- {#each lines as line, i} -->
         <input
           type="text"
@@ -62,25 +59,41 @@
           placeholder="Message inside frame"
           class="input input-bordered input-lg w-full max-w-xs"
         />
-        <br />
         <!-- {/each} -->
-        <br />
-        <hr />
-        <br />
-        <label for="result">Result</label>
-        <br />
+
+        <label class="label" for="result">Result</label>
         <textarea
           class="textarea textarea-primary"
           name="result"
           id="result"
           rows="6"
-          cols="25"
+          cols={width * 2.4}
           value={result()}
         />
         <br />
-        <button class="btn btn-primary" on:click={copy(result())}>
+        <button class="btn btn-primary btn-wide" on:click={copy(result())}>
           Copy result
         </button>
+
+        <div class="divider" />
+        <h2 class="text-2xl font-bold">Settings</h2>
+        <label class="label" for="bg">Background Emoji</label>
+        <input
+          type="text"
+          bind:value={bg}
+          placeholder="Background emoji"
+          id="bg"
+          class="input input-bordered input-lg w-full max-w-xs"
+        />
+        <label class="label" for="width">Width ({width})</label>
+        <input
+          type="range"
+          min="7"
+          max="42"
+          bind:value={width}
+          class="range range-accent"
+          id="width"
+        />
       </div>
     </div>
   </div>
