@@ -149,7 +149,10 @@
           value={result()}
         />
         <br />
-        <button class="btn btn-primary btn-wide" on:click={copy(result())}>
+        <button
+          class="btn btn-primary btn-wide"
+          on:click={copy(`${result()}\n#Framoji`)}
+        >
           Copy result
         </button>
 
