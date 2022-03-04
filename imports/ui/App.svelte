@@ -4,11 +4,11 @@
   const inspirations = [
     {
       emoji: "🖼️",
-      message: "This is a test. Keep on scrolling as natural as possible.",
+      message: "This is a test, keep on scrolling as natural as possible.",
     },
     { emoji: "🍔", message: "I Can Has Cheez Burger?" },
     { emoji: "🌼", message: "Flower Power" },
-    { emoji: "🍎", message: "An emoji a day keep the clouds away" },
+    { emoji: "🍎", message: "An emoji a day keep the doctor away" },
     { emoji: "🚀", message: "This is not rocket science" },
     {
       emoji: "🤔",
@@ -28,7 +28,7 @@
       emoji: "🧐",
       message: "I don't always use emojis, but when I do it's Framoji.",
     },
-    { emoji: "🇺🇦", message: "Not only thoughts and prayers" },
+    { emoji: "🇺🇦", message: "NOT ONLY THOUGHTS AND PRAYERS" },
     {
       emoji: "☁️",
       message: "There is no cloud, it's just someone else's computer",
@@ -37,7 +37,7 @@
     {
       emoji: "💍",
       message:
-        "One Ring to rule them all, One Ring to find them, One Ring to bring them allu and in the darkness bind them.",
+        "One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them.",
     },
     {
       emoji: "🚲",
@@ -51,26 +51,18 @@
         "Computers make excellent and efficient servants, but I have no wish to serve under them.",
     },
     { emoji: "🦖", message: "Do You Think He Saurus?" },
+    { emoji: "🕵", message: "Who Watches the Watchmen?" },
+    { emoji: "🍾", message: "Save water drink champagne" },
+    { emoji: "👑", message: "KEEP CALM AND CARRY ON" },
+    {
+      emoji: "🙋",
+      message: "Did you know that triple click select the entire line?",
+    },
   ];
   const randomIndex = Math.floor(Math.random() * inspirations.length);
   let { emoji, message } = inspirations[randomIndex];
 
-  const backgrounds = [
-    "⬜",
-    "⬛️",
-    "🔲",
-    "◻️",
-    "◽",
-    "◼️",
-    "◾",
-    "🟨",
-    "🟪",
-    "🟧",
-    "🟩",
-    "🟫",
-    "🟦",
-    "🟥",
-  ];
+  const backgrounds = ["⬜", "⬛️", "🔲", "◻️", "◽", "◼️", "◾", "    "];
   const randomBgIndex = Math.floor(Math.random() * backgrounds.length);
   let bg = backgrounds[randomBgIndex];
 
@@ -133,28 +125,45 @@
     }
     return `${border}${framedLines}\n${border}`;
   };
+
+  const copyResult = () => {
+    const result = document.getElementById("result").value;
+    console.log({ result });
+    copy(`${result} \n#Framoji`);
+    alert("Copied to clipboard");
+  };
 </script>
 
 <div class="main">
   <div class="hero min-h-screen bg-base-200">
     <div class="hero-content">
       <div class="max-w-md">
-        <h1 class="text-center text-5xl font-bold">Framoji {emoji}</h1>
+        <h1
+          on:click={() => location.reload()}
+          class="text-center text-5xl font-bold"
+        >
+          Framoji {emoji}
+        </h1>
         <p class="text-center">Write inside an emoji frame.</p>
+        <p class="text-center">
+          <small><em>Click header to reload</em></small>
+        </p>
+
         <div class="divider" />
+
         <label class="label" for="emoji">Emoji</label>
         <input
           type="text"
           bind:value={emoji}
           placeholder="Frame emoji"
           id="emoji"
-          class="input input-bordered input-lg w-full max-w-xs"
+          class="input input-bordered w-full max-w-xs"
         />
         <label class="label" for="message">Message</label>
         <textarea
           class="textarea w-full max-w-xs"
           bind:value={message}
-          rows={Math.round(lines.length / 2)}
+          rows="2"
         />
 
         <label class="label" for="result">Result</label>
@@ -167,12 +176,12 @@
           value={result()}
         />
         <br />
-        <button
-          class="btn btn-primary btn-wide"
-          on:click={copy(`${result()}\n#Framoji`)}
-        >
+        <button class="btn btn-primary btn-wide w-full" on:click={copyResult}>
           Copy result
         </button>
+        <p class="text-center">
+          <small>You can edit result before copy.</small>
+        </p>
 
         <div class="divider" />
         <h2 class="text-2xl font-bold">Settings</h2>
@@ -188,8 +197,9 @@
           bind:value={bg}
           placeholder="Background emoji"
           id="bg"
-          class="input input-bordered input-lg w-full max-w-xs"
+          class="input input-bordered w-full max-w-xs"
         />
+        <small class="label">Put spaces for transparent background</small>
         <label class="label" for="width">Width ({width})</label>
         <input
           type="range"
@@ -200,7 +210,6 @@
           id="width"
         />
 
-        <p class="text-center">Reload for inspiration...</p>
         <div class="divider" />
         <p class="text-center">
           <a href="https://github.com/guidouil/framoji" target="_blank">
@@ -211,3 +220,9 @@
     </div>
   </div>
 </div>
+
+<style>
+  h1 {
+    cursor: pointer;
+  }
+</style>
