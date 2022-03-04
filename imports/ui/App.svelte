@@ -58,8 +58,9 @@
 
   let width = 9;
   let showMargin = false;
-  const spaceLength = 4; // width of a space char in px
+  const spaceLength = 4; // width of a space char in pixels
 
+  // This is insane or genius...
   const visualLength = (line) => {
     const smallText = document.createElement("small");
     smallText.innerText = line;
@@ -74,25 +75,8 @@
     return length;
   };
 
-  const makeLines = (message, width) => {
-    let lines = [];
-    const wordsPerLine = Math.round(width / 3);
-    const words = message.split(" ");
-    if (words && words.length > 0) {
-      let line = "";
-      words.forEach((word, index) => {
-        line += `${word} `;
-        if ((index + 1) % wordsPerLine === 0 || index === words.length - 1) {
-          lines.push(line.trim());
-          line = "";
-        }
-      });
-    }
-    return lines;
-  };
-  $: lines = makeLines(message, width);
-
   $: result = () => {
+    // top and bottom borders
     let border = "";
     for (let i = 0; i < width; i += 1) {
       border += emoji;
@@ -100,12 +84,28 @@
     const borderLength = visualLength(border);
     const emojiLength = visualLength(emoji);
     const innerLength = borderLength - emojiLength * 2;
+
+    // top and botton margins
     let margin = `\n${emoji}`;
     for (let i = 0; i < innerLength; i += spaceLength) {
       margin += " ";
     }
     margin += emoji;
 
+    // cut message in lines
+    let lines = [];
+    const words = message.split(" ");
+    let line = "";
+    words.forEach((word, index) => {
+      line += `${word} `;
+      const lineLength = visualLength(line);
+      if (lineLength >= innerLength - 54 || index === words.length - 1) {
+        // border each side or last word
+        lines.push(line.trim());
+        line = "";
+      }
+    });
+    // frame each line
     let framedLines = "";
     if (lines && lines.length > 0) {
       lines.forEach((line) => {

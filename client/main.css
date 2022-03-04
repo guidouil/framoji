@@ -10,7 +10,3 @@ body {
 html {
   height: 100%;
 }
-.hide {
-  visibility: hidden;
-  white-space: nowrap;
-}

@@ -52,7 +52,7 @@ npm install -g meteor
 ## Roadmap
 
 * [x] Transparent background
-* [ ] Better lines margin
+* [x] Better lines margin
 * [ ] Multiple emojis as frame
 
 See the [open issues](https://github.com/guidouil/framoji/issues) for a full list of proposed features (and known issues).
