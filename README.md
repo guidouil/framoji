@@ -1,11 +1,9 @@
 <div id="top"></div>
 
 <pre>
-🌼🌼🌼🌼🌼🌼🌼🌼🌼🌼🌼🌼🌼🌼🌼
-🌼⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜🌼
-🌼⬜⬜⬜⬜Framoji ⬜⬜⬜⬜⬜🌼
-🌼⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜🌼
-🌼🌼🌼🌼🌼🌼🌼🌼🌼🌼🌼🌼🌼🌼🌼
+🌼🌼🌼🌼🌼🌼🌼🌼🌼
+🌼    Framoji    🌼
+🌼🌼🌼🌼🌼🌼🌼🌼🌼
 </pre>
 # Framoji
 
@@ -49,6 +47,17 @@ npm install -g meteor
     ```sh
     npm start
     ```
+
+<!-- ROADMAP -->
+## Roadmap
+
+* [x] Transparent background
+* [ ] Better lines margin
+* [ ] Multiple emojis as frame
+
+See the [open issues](https://github.com/guidouil/framoji/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 ## Contributing

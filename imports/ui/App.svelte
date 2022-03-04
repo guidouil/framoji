@@ -6,22 +6,22 @@
       emoji: "🖼️",
       message: "This is a test, keep on scrolling as natural as possible.",
     },
-    { emoji: "🍔", message: "I Can Has Cheezburger?" },
-    { emoji: "🌼", message: "Flower Power" },
-    { emoji: "🍎", message: "An emoji a day keep the doctor away" },
-    { emoji: "🚀", message: "This is not rocket science" },
+    { emoji: "🍔", message: "I Can Has 🍔 ?" },
+    { emoji: "🌼", message: "Flower Powered" },
+    { emoji: "🍎", message: "An 🍏 a day keep the 🧑‍⚕️ away" },
+    { emoji: "☄️", message: "This is not 🚀 science" },
     {
       emoji: "🤔",
       message:
         "Some men see things as they are and ask, Why? I dream things that never were and ask, Why not?",
     },
     { emoji: "🟨", message: "I need more sticky notes" },
-    { emoji: "🐈", message: "The Internet is made of cats" },
+    { emoji: "🐈", message: "The Internet is made of 😺" },
     { emoji: "🟪", message: "May the force be with you" },
-    { emoji: "🟩", message: "Green is my favorite color" },
+    { emoji: "💚", message: "🟩 is my favorite color" },
     {
       emoji: "🌹",
-      message: "Roses are red, Violets are blue. I like rain, got no clue.",
+      message: "Roses are 🔴, Violets are 🔵. I like 🌧️, got no 🔍.",
     },
     { emoji: "❤️️", message: "Hold On, If Love Is The Answer Your Home." },
     {
@@ -31,27 +31,26 @@
     { emoji: "🇺🇦", message: "Stop War" },
     {
       emoji: "☁️",
-      message: "There is no cloud, it's just someone else's computer",
+      message: "There is no ☁️, it's just someone else's 💻",
     },
     { emoji: "🤖", message: "I'm sorry, Dave. I'm afraid I can't do that." },
     {
       emoji: "💍",
       message:
-        "One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them.",
+        "One 💍 to rule them all, One 💍 to find them, One 💍 to bring them all and in the darkness bind them.",
     },
     {
       emoji: "🚲",
       message:
-        "Life is like riding a bicycle. To keep your balance, you must keep moving.",
+        "Life is like riding a 🚲. To keep your balance, you must keep moving.",
     },
     { emoji: "🤪", message: "Stupid is as stupid does." },
     { emoji: "🦖", message: "Do You Think He Saurus?" },
     { emoji: "🕵", message: "Who Watches the Watchmen?" },
     { emoji: "🍾", message: "Save water drink champagne" },
-    { emoji: "👑", message: "KEEP CALM AND CARRY ON" },
     {
       emoji: "🙋",
-      message: "Did you know that triple click select the entire line?",
+      message: "Triple click select the entire line",
     },
   ];
   const randomIndex = Math.floor(Math.random() * inspirations.length);
