@@ -6,7 +6,7 @@
       emoji: "🖼️",
       message: "This is a test, keep on scrolling as natural as possible.",
     },
-    { emoji: "🍔", message: "I Can Has Cheez Burger?" },
+    { emoji: "🍔", message: "I Can Has Cheezburger?" },
     { emoji: "🌼", message: "Flower Power" },
     { emoji: "🍎", message: "An emoji a day keep the doctor away" },
     { emoji: "🚀", message: "This is not rocket science" },
@@ -62,12 +62,9 @@
   const randomIndex = Math.floor(Math.random() * inspirations.length);
   let { emoji, message } = inspirations[randomIndex];
 
-  const backgrounds = ["⬜", "⬛️", "🔲", "◻️", "◽", "◼️", "◾", "    "];
-  const randomBgIndex = Math.floor(Math.random() * backgrounds.length);
-  let bg = backgrounds[randomBgIndex];
-
-  let width = 9;
-  let showMargin = true;
+  let width = 10;
+  let showMargin = false;
+  const bg = "   "; // 3 spaces is 1 emoji
 
   const makeLines = (message, width) => {
     let lines = [];
@@ -78,7 +75,7 @@
       words.forEach((word, index) => {
         line += `${word} `;
         if ((index + 1) % wordsPerLine === 0 || index === words.length - 1) {
-          lines.push(` ${line}`);
+          lines.push(line.trim());
           line = "";
         }
       });
@@ -89,7 +86,7 @@
 
   $: result = () => {
     let border = "";
-    for (let i = 0; i < width; i += 1) {
+    for (let i = 1; i < width; i += 1) {
       border += emoji;
     }
     let margin = "\n";
@@ -97,27 +94,21 @@
       if (i === 0 || i === width - 1) {
         margin += emoji;
       } else {
-        margin += bg;
+        margin += "    ";
       }
     }
     let framedLines = "";
+    const emptyLineLength = (width - 2) * bg.length;
     if (lines && lines.length > 0) {
       lines.forEach((line) => {
-        const leftMargeCount = Math.floor((width - 2 - line.length / 3) / 2);
-        let leftMarge = "";
-        if (leftMargeCount > 0) {
-          for (let i = 0; i < leftMargeCount; i += 1) {
-            leftMarge += bg;
+        let margin = "";
+        if (line.length < emptyLineLength) {
+          const marginLength = Math.round((emptyLineLength - line.length) / 2);
+          for (let i = 0; i < marginLength; i += 1) {
+            margin += " ";
           }
         }
-        const rightMargeCount = Math.round((width - 2 - line.length / 3) / 2);
-        let rightMarge = "";
-        if (rightMargeCount > 0) {
-          for (let i = 0; i < rightMargeCount; i += 1) {
-            rightMarge += bg;
-          }
-        }
-        framedLines += `\n${emoji}${leftMarge}${line}${rightMarge}${emoji}`;
+        framedLines += `\n${emoji}${margin}${line}${margin}${emoji}`;
       });
     }
     if (showMargin) {
@@ -128,7 +119,6 @@
 
   const copyResult = () => {
     const result = document.getElementById("result").value;
-    console.log({ result });
     copy(`${result} \n#Framoji`);
     alert("Copied to clipboard");
   };
@@ -148,8 +138,6 @@
         <p class="text-center">
           <small><em>Click header to reload</em></small>
         </p>
-
-        <div class="divider" />
 
         <label class="label" for="emoji">Emoji</label>
         <input
@@ -171,7 +159,7 @@
           class="textarea textarea-primary"
           name="result"
           id="result"
-          rows={lines.length + 4}
+          rows="6"
           cols={width * 2.7}
           value={result()}
         />
@@ -183,32 +171,23 @@
           <small>You can edit result before copy.</small>
         </p>
 
-        <div class="divider" />
-        <h2 class="text-2xl font-bold">Settings</h2>
+        <!-- <div class="divider" /> -->
+        <!-- <h2 class="text-2xl font-bold">Settings</h2> -->
+        <label class="label" for="width">Width ({width - 1})</label>
+        <input
+          type="range"
+          min="4"
+          max="43"
+          bind:value={width}
+          class="range range-accent"
+          id="width"
+        />
         <div class="form-control">
           <label class="label cursor-pointer">
             <input type="checkbox" class="toggle" bind:checked={showMargin} />
             <span class="label-text">Top and bottom margin</span>
           </label>
         </div>
-        <label class="label" for="bg">Background Emoji</label>
-        <input
-          type="text"
-          bind:value={bg}
-          placeholder="Background emoji"
-          id="bg"
-          class="input input-bordered w-full max-w-xs"
-        />
-        <small class="label">Put spaces for transparent background</small>
-        <label class="label" for="width">Width ({width})</label>
-        <input
-          type="range"
-          min="4"
-          max="42"
-          bind:value={width}
-          class="range range-accent"
-          id="width"
-        />
 
         <div class="divider" />
         <p class="text-center">
