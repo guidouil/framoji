@@ -6,8 +6,8 @@
       emoji: "🖼️",
       message: "This is a test, keep on scrolling as natural as possible.",
     },
-    { emoji: "🍔", message: "I Can Has 🍔 ?" },
-    { emoji: "🌼", message: "Flower Powered" },
+    { emoji: "🍔", message: "I Can Has 🍔?" },
+    { emoji: "🌼", message: "🌼 powered" },
     { emoji: "🍎", message: "An 🍏 a day keep the 🧑‍⚕️ away" },
     { emoji: "☄️", message: "This is not 🚀 science" },
     {
@@ -15,20 +15,20 @@
       message:
         "Some men see things as they are and ask, Why? I dream things that never were and ask, Why not?",
     },
-    { emoji: "🟨", message: "I need more sticky notes" },
-    { emoji: "🐈", message: "The Internet is made of 😺" },
-    { emoji: "🟪", message: "May the force be with you" },
+    { emoji: "🟨", message: "I need more sticky 🗒️" },
+    { emoji: "🐈", message: "The Internet is made of 😸" },
+    { emoji: "🙏", message: "May the force be with you" },
     { emoji: "💚", message: "🟩 is my favorite color" },
     {
       emoji: "🌹",
       message: "Roses are 🔴, Violets are 🔵. I like 🌧️, got no 🔍.",
     },
-    { emoji: "❤️️", message: "Hold On, If Love Is The Answer Your Home." },
+    { emoji: "❤️️", message: "Hold on, if ❤️️ is the answer your 🏠" },
     {
       emoji: "🧐",
       message: "I don't always use emojis, but when I do it's Framoji.",
     },
-    { emoji: "🇺🇦", message: "Stop War" },
+    { emoji: "🇺🇦", message: "🕊️ & ❤️" },
     {
       emoji: "☁️",
       message: "There is no ☁️, it's just someone else's 💻",
@@ -44,13 +44,13 @@
       message:
         "Life is like riding a 🚲. To keep your balance, you must keep moving.",
     },
-    { emoji: "🤪", message: "Stupid is as stupid does." },
+    { emoji: "🤪", message: "Stupid is as stupid does" },
     { emoji: "🦖", message: "Do You Think He Saurus?" },
-    { emoji: "🕵", message: "Who Watches the Watchmen?" },
-    { emoji: "🍾", message: "Save water drink champagne" },
+    { emoji: "🕵", message: "Who 👀 the Watchmen?" },
+    { emoji: "🍾", message: "Save 💦 drink Champagne" },
     {
       emoji: "🙋",
-      message: "Triple click select the entire line",
+      message: "3️⃣ clicks select the all line",
     },
   ];
   const randomIndex = Math.floor(Math.random() * inspirations.length);
