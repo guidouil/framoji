@@ -6,7 +6,7 @@
       emoji: "🖼️",
       message: "This is a test. Keep on scrolling as natural as possible.",
     },
-    { emoji: "🍔", message: "I Can Has Cheezburger?" },
+    { emoji: "🍔", message: "I Can Has Cheez Burger?" },
     { emoji: "🌼", message: "Flower Power" },
     { emoji: "🍎", message: "An emoji a day keep the clouds away" },
     { emoji: "🚀", message: "This is not rocket science" },
@@ -82,18 +82,11 @@
     const wordsPerLine = Math.round((width - 2) / 3);
     const words = message.split(" ");
     if (words && words.length > 0) {
-      // join short words
-      words.forEach((word, i) => {
-        if (word.length <= 2 && words[i + 1] && words[i + 1].length <= 2) {
-          words[i] += ` ${words[i + 1]}`;
-          words.splice(i + 1, 1);
-        }
-      });
       let line = "";
       words.forEach((word, index) => {
         line += `${word} `;
         if ((index + 1) % wordsPerLine === 0 || index === words.length - 1) {
-          lines.push(line.trim());
+          lines.push(` ${line}`);
           line = "";
         }
       });
