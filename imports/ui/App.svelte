@@ -28,7 +28,7 @@
       emoji: "🧐",
       message: "I don't always use emojis, but when I do it's Framoji.",
     },
-    { emoji: "🇺🇦", message: "NOT ONLY THOUGHTS AND PRAYERS" },
+    { emoji: "🇺🇦", message: "Stop War" },
     {
       emoji: "☁️",
       message: "There is no cloud, it's just someone else's computer",
@@ -45,11 +45,6 @@
         "Life is like riding a bicycle. To keep your balance, you must keep moving.",
     },
     { emoji: "🤪", message: "Stupid is as stupid does." },
-    {
-      emoji: "🖖",
-      message:
-        "Computers make excellent and efficient servants, but I have no wish to serve under them.",
-    },
     { emoji: "🦖", message: "Do You Think He Saurus?" },
     { emoji: "🕵", message: "Who Watches the Watchmen?" },
     { emoji: "🍾", message: "Save water drink champagne" },
@@ -62,13 +57,12 @@
   const randomIndex = Math.floor(Math.random() * inspirations.length);
   let { emoji, message } = inspirations[randomIndex];
 
-  let width = 10;
+  let width = 9;
   let showMargin = false;
-  const bg = "   "; // 3 spaces is 1 emoji
 
   const makeLines = (message, width) => {
     let lines = [];
-    const wordsPerLine = Math.round((width - 2) / 3);
+    const wordsPerLine = Math.round((width - 1) / 3);
     const words = message.split(" ");
     if (words && words.length > 0) {
       let line = "";
@@ -86,7 +80,7 @@
 
   $: result = () => {
     let border = "";
-    for (let i = 1; i < width; i += 1) {
+    for (let i = 0; i < width; i += 1) {
       border += emoji;
     }
     let margin = "\n";
@@ -98,17 +92,26 @@
       }
     }
     let framedLines = "";
-    const emptyLineLength = (width - 2) * bg.length;
+    const emptyLineLength = (width - 1) * 3; // 3 spaces is 1 emoji
     if (lines && lines.length > 0) {
       lines.forEach((line) => {
-        let margin = "";
+        let margeLeft = "";
+        let margeRight = "";
         if (line.length < emptyLineLength) {
-          const marginLength = Math.round((emptyLineLength - line.length) / 2);
-          for (let i = 0; i < marginLength; i += 1) {
-            margin += " ";
+          const margeLengthLeft = Math.floor(
+            (emptyLineLength - line.length) / 2
+          );
+          const margeLengthRight = Math.round(
+            (emptyLineLength - line.length) / 2
+          );
+          for (let i = 0; i < margeLengthLeft; i += 1) {
+            margeLeft += " ";
+          }
+          for (let i = 0; i < margeLengthRight; i += 1) {
+            margeRight += " ";
           }
         }
-        framedLines += `\n${emoji}${margin}${line}${margin}${emoji}`;
+        framedLines += `\n${emoji}${margeLeft}${line}${margeRight}${emoji}`;
       });
     }
     if (showMargin) {
@@ -173,11 +176,11 @@
 
         <!-- <div class="divider" /> -->
         <!-- <h2 class="text-2xl font-bold">Settings</h2> -->
-        <label class="label" for="width">Width ({width - 1})</label>
+        <label class="label" for="width">Width ({width})</label>
         <input
           type="range"
           min="4"
-          max="43"
+          max="42"
           bind:value={width}
           class="range range-accent"
           id="width"
