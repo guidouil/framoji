@@ -58,10 +58,25 @@
 
   let width = 9;
   let showMargin = false;
+  const spaceLength = 4; // width of a space char in px
+
+  const visualLength = (line) => {
+    const smallText = document.createElement("small");
+    smallText.innerText = line;
+    const longText = document.createElement("span");
+    const text = document.createTextNode(line);
+    longText.appendChild(text);
+    document.body.appendChild(smallText);
+    document.body.appendChild(longText);
+    const length = (smallText.offsetWidth + longText.offsetWidth) / 2;
+    document.body.removeChild(smallText);
+    document.body.removeChild(longText);
+    return length;
+  };
 
   const makeLines = (message, width) => {
     let lines = [];
-    const wordsPerLine = Math.round((width - 1) / 3);
+    const wordsPerLine = Math.round(width / 3);
     const words = message.split(" ");
     if (words && words.length > 0) {
       let line = "";
@@ -82,31 +97,28 @@
     for (let i = 0; i < width; i += 1) {
       border += emoji;
     }
-    let margin = "\n";
-    for (let i = 0; i < width; i += 1) {
-      if (i === 0 || i === width - 1) {
-        margin += emoji;
-      } else {
-        margin += "    ";
-      }
+    const borderLength = visualLength(border);
+    const emojiLength = visualLength(emoji);
+    const innerLength = borderLength - emojiLength * 2;
+    let margin = `\n${emoji}`;
+    for (let i = 0; i < innerLength; i += spaceLength) {
+      margin += " ";
     }
+    margin += emoji;
+
     let framedLines = "";
-    const emptyLineLength = (width - 1) * 3; // 3 spaces is 1 emoji
     if (lines && lines.length > 0) {
       lines.forEach((line) => {
         let margeLeft = "";
         let margeRight = "";
-        if (line.length < emptyLineLength) {
-          const margeLengthLeft = Math.floor(
-            (emptyLineLength - line.length) / 2
-          );
-          const margeLengthRight = Math.round(
-            (emptyLineLength - line.length) / 2
-          );
-          for (let i = 0; i < margeLengthLeft; i += 1) {
+        const lineLength = visualLength(line);
+        if (lineLength < innerLength) {
+          const margeLengthLeft = Math.floor((innerLength - lineLength) / 2);
+          const margeLengthRight = Math.round((innerLength - lineLength) / 2);
+          for (let i = 0; i < margeLengthLeft; i += spaceLength) {
             margeLeft += " ";
           }
-          for (let i = 0; i < margeLengthRight; i += 1) {
+          for (let i = 0; i < margeLengthRight; i += spaceLength) {
             margeRight += " ";
           }
         }
