@@ -12,8 +12,9 @@ html {
 }
 
 input, textarea {
-  font-size: 14pt !important;
+  font-size: 16pt !important;
 }
 span {
-  font-size: 10pt !important;
+  font-size: 11pt !important;
+  white-space: nowrap !important;
 }

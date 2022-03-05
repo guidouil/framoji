@@ -1,5 +1,6 @@
 <script>
   import DeviceDetector from "svelte-device-detector";
+  import vanillaToast from "vanilla-toast";
   const { EmojiButton } = require("@joeattardi/emoji-button");
   const copy = require("clipboard-copy");
 
@@ -61,7 +62,6 @@
 
   let width = 9;
   let showMargin = false;
-  const spaceLength = 4; // width of a space char in pixels
 
   const visualLength = (line) => {
     const span = document.createElement("span");
@@ -73,6 +73,8 @@
     // console.log(length);
     return length;
   };
+  const spaceLength = visualLength("."); // width of a space char in pixels
+  // console.log(spaceLength);
 
   $: result = () => {
     // top and bottom borders
@@ -83,6 +85,7 @@
     const borderLength = visualLength(border);
     const emojiLength = visualLength(emoji);
     const innerLength = borderLength - emojiLength * 2;
+    // console.log({ borderLength, emojiLength, innerLength });
 
     // top and botton margins
     let margin = `\n${emoji}`;
@@ -134,7 +137,7 @@
   const copyResult = () => {
     const result = document.getElementById("result").value;
     copy(`${result} \n#Framoji`);
-    alert("Copied to clipboard");
+    vanillaToast.success("Copied to clipboard");
   };
 
   const showEmojiPicker = () => {
@@ -157,7 +160,7 @@
           on:click={() => location.reload()}
           class="text-center text-5xl font-bold"
         >
-          Framoji {emoji}
+          Framoji&nbsp;{emoji}
         </h1>
         <p class="text-center">Write inside an emoji frame.</p>
         <p class="text-center">
@@ -202,7 +205,7 @@
           Copy result
         </button>
         <p class="text-center">
-          <small>You can edit result before copy.</small>
+          <small>You can edit the result before copy.</small>
         </p>
 
         <label class="label" for="width">Width ({width})</label>
