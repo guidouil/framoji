@@ -1,4 +1,5 @@
 <script>
+  const { EmojiButton } = require("@joeattardi/emoji-button");
   const copy = require("clipboard-copy");
 
   const inspirations = [
@@ -18,7 +19,7 @@
     { emoji: "🟨", message: "I need more sticky 🗒️" },
     { emoji: "🐈", message: "The Internet is made of 😸" },
     { emoji: "🙏", message: "May the force be with you" },
-    { emoji: "💚", message: "🟩 is my favorite color" },
+    { emoji: "💚", message: "Green is my favorite color" },
     {
       emoji: "🌹",
       message: "Roses are 🔴, Violets are 🔵. I like 🌧️, got no 🔍.",
@@ -52,6 +53,7 @@
       emoji: "🙋",
       message: "3️⃣ clicks select the all line",
     },
+    { emoji: "🐢", message: "I like turtles" },
   ];
   const randomIndex = Math.floor(Math.random() * inspirations.length);
   let { emoji, message } = inspirations[randomIndex];
@@ -113,8 +115,9 @@
         let margeRight = "";
         const lineLength = visualLength(line);
         if (lineLength < innerLength) {
-          const margeLengthLeft = Math.floor((innerLength - lineLength) / 2);
-          const margeLengthRight = Math.round((innerLength - lineLength) / 2);
+          const margeLengthLeft = Math.round((innerLength - lineLength) / 2);
+          const margeLengthRight = Math.floor((innerLength - lineLength) / 2);
+          // console.log({ margeLengthLeft, margeLengthRight });
           for (let i = 0; i < margeLengthLeft; i += spaceLength) {
             margeLeft += " ";
           }
@@ -136,6 +139,16 @@
     copy(`${result} \n#Framoji`);
     alert("Copied to clipboard");
   };
+
+  const picker = new EmojiButton();
+  const showEmojiPicker = () => {
+    const trigger = document.querySelector("#emoji-trigger");
+    picker.togglePicker(trigger);
+    picker.on("emoji", (selection) => {
+      emoji = selection.emoji;
+      return true;
+    });
+  };
 </script>
 
 <div class="main">
@@ -153,6 +166,12 @@
           <small><em>Click header to reload</em></small>
         </p>
 
+        <button
+          class="btn btn-circle right-floated text-xl"
+          id="emoji-trigger"
+          on:click={showEmojiPicker}
+          >{emoji}
+        </button>
         <label class="label" for="emoji">Emoji</label>
         <input
           type="text"
@@ -161,6 +180,7 @@
           id="emoji"
           class="input input-bordered w-full max-w-xs"
         />
+
         <label class="label" for="message">Message</label>
         <textarea
           class="textarea w-full max-w-xs"
@@ -217,5 +237,8 @@
 <style>
   h1 {
     cursor: pointer;
+  }
+  .right-floated {
+    float: right;
   }
 </style>

@@ -10,3 +10,7 @@ body {
 html {
   height: 100%;
 }
+
+input, textarea {
+  font-size: 15pt !important;
+}

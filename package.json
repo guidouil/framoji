@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.17.2",
+    "@joeattardi/emoji-button": "^4.6.2",
     "clipboard-copy": "^4.0.1",
-    "daisyui": "^2.2.2",
+    "daisyui": "^2.6.0",
     "meteor-node-stubs": "^1.1.0",
     "postcss": "^8.3.9",
     "svelte": "^3.46.4"
