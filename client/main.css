@@ -12,5 +12,8 @@ html {
 }
 
 input, textarea {
-  font-size: 15pt !important;
+  font-size: 14pt !important;
+}
+span {
+  font-size: 10pt !important;
 }

@@ -1,4 +1,5 @@
 <script>
+  import DeviceDetector from "svelte-device-detector";
   const { EmojiButton } = require("@joeattardi/emoji-button");
   const copy = require("clipboard-copy");
 
@@ -62,18 +63,14 @@
   let showMargin = false;
   const spaceLength = 4; // width of a space char in pixels
 
-  // This is insane or genius...
   const visualLength = (line) => {
-    const smallText = document.createElement("small");
-    smallText.innerText = line;
-    const longText = document.createElement("span");
+    const span = document.createElement("span");
     const text = document.createTextNode(line);
-    longText.appendChild(text);
-    document.body.appendChild(smallText);
-    document.body.appendChild(longText);
-    const length = (smallText.offsetWidth + longText.offsetWidth) / 2;
-    document.body.removeChild(smallText);
-    document.body.removeChild(longText);
+    span.appendChild(text);
+    document.body.appendChild(span);
+    const length = span.offsetWidth;
+    document.body.removeChild(span);
+    // console.log(length);
     return length;
   };
 
@@ -140,12 +137,13 @@
     alert("Copied to clipboard");
   };
 
-  const picker = new EmojiButton();
   const showEmojiPicker = () => {
+    const picker = new EmojiButton();
     const trigger = document.querySelector("#emoji-trigger");
     picker.togglePicker(trigger);
     picker.on("emoji", (selection) => {
       emoji = selection.emoji;
+      picker.destroyPicker();
       return true;
     });
   };
@@ -166,12 +164,14 @@
           <small><em>Click header to reload</em></small>
         </p>
 
-        <button
-          class="btn btn-circle right-floated text-xl"
-          id="emoji-trigger"
-          on:click={showEmojiPicker}
-          >{emoji}
-        </button>
+        <DeviceDetector showInDevice="desktop">
+          <button
+            class="btn btn-circle right-floated text-xl"
+            id="emoji-trigger"
+            on:click={showEmojiPicker}
+            >{emoji}
+          </button>
+        </DeviceDetector>
         <label class="label" for="emoji">Emoji</label>
         <input
           type="text"
@@ -205,8 +205,6 @@
           <small>You can edit result before copy.</small>
         </p>
 
-        <!-- <div class="divider" /> -->
-        <!-- <h2 class="text-2xl font-bold">Settings</h2> -->
         <label class="label" for="width">Width ({width})</label>
         <input
           type="range"
