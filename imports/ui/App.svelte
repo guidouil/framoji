@@ -1,8 +1,9 @@
 <script>
   import DeviceDetector from "svelte-device-detector";
   import vanillaToast from "vanilla-toast";
-  const { EmojiButton } = require("@joeattardi/emoji-button");
-  const copy = require("clipboard-copy");
+  import { EmojiButton } from "@joeattardi/emoji-button";
+  import copy from "clipboard-copy";
+  import GraphemeSplitter from "grapheme-splitter";
 
   const inspirations = [
     {
@@ -10,7 +11,7 @@
       message: "This is a test, keep scrolling as natural as possible.",
     },
     { emoji: "🍔", message: "I Can Has 🍔?" },
-    { emoji: "🌼", message: "🌼 powered" },
+    { emoji: "🌼🌻🌸", message: "Powered" },
     { emoji: "🍎", message: "An 🍏 a day keep the 🧑‍⚕️ away" },
     { emoji: "🔲", message: "This is not 🚀 science" },
     {
@@ -58,8 +59,27 @@
     { emoji: "🐢", message: "I like turtles" },
     { emoji: "🦆", message: "What the duck?" },
   ];
-  const randomIndex = Math.floor(Math.random() * inspirations.length);
-  let { emoji, message } = inspirations[randomIndex];
+  let emoji;
+  let message;
+  let emojis;
+
+  const splitEmojis = () => {
+    const splitter = new GraphemeSplitter();
+    emojis = splitter.splitGraphemes(emoji);
+    if (emojis.length > 4) {
+      vanillaToast.error("Maximum 4 emojis");
+      emojis.length = 4;
+      emoji = emojis.join("");
+    }
+  };
+
+  const getInspired = () => {
+    const randomIndex = Math.floor(Math.random() * inspirations.length);
+    emoji = inspirations[randomIndex].emoji;
+    message = inspirations[randomIndex].message;
+    splitEmojis();
+  };
+  getInspired();
 
   let width = 9;
   let showMargin = false;
@@ -77,22 +97,46 @@
   };
 
   $: result = () => {
+    let result = "";
     // top and bottom borders
-    let border = "";
-    for (let i = 0; i < width; i += 1) {
-      border += emoji;
+    let borders = [];
+    for (let emojisIndex = 0; emojisIndex < emojis.length; emojisIndex += 1) {
+      let border = "";
+      for (let i = 0; i < width; i += 1) {
+        if (i === 0 || i === width - 1) {
+          border += emojis[0];
+        } else if (
+          emojisIndex > 0 &&
+          emojis[1] &&
+          (i === 1 || i === width - 2)
+        ) {
+          border += emojis[1];
+        } else if (
+          emojisIndex > 1 &&
+          emojis[2] &&
+          (i === 2 || i === width - 3)
+        ) {
+          border += emojis[2];
+        } else {
+          border += emojis[emojisIndex];
+        }
+      }
+      borders.push(`${border}\n`);
     }
-    const borderLength = visualLength(border);
+    const borderLength = visualLength(borders[0]);
     const emojiLength = visualLength(emoji);
     const innerLength = borderLength - emojiLength * 2;
     // console.log({ borderLength, emojiLength, innerLength });
 
     // top and botton margins
-    let margin = `\n${emoji}`;
+    let margin = `${emoji}`;
     for (let i = 0; i < innerLength; i += spaceLength) {
       margin += " ";
     }
-    margin += emoji;
+    emojis.reverse();
+    margin += emojis.join("");
+    emojis.reverse();
+    margin += "\n";
 
     // cut message in lines
     let lines = [];
@@ -111,8 +155,8 @@
     let framedLines = "";
     if (lines && lines.length > 0) {
       lines.forEach((line) => {
+        let framedLine = "";
         let marge = "";
-        let margeRight = "";
         const lineLength = visualLength(line);
         if (lineLength < innerLength) {
           const margeLength = (innerLength - lineLength) / 2;
@@ -120,13 +164,35 @@
             marge += " ";
           }
         }
-        framedLines += `\n${emoji}${marge}${line}${marge}${emoji}`;
+        framedLine += `${emoji}${marge}${line}${marge}`;
+        emojis.reverse();
+        framedLine += emojis.join("");
+        emojis.reverse();
+        framedLines += `${framedLine}\n`;
       });
     }
     if (showMargin) {
-      return `${border}${margin}${framedLines}${margin}\n${border}`;
+      borders.forEach((border) => {
+        result += border;
+      });
+      result += margin;
+      result += framedLines;
+      result += margin;
+      borders.reverse();
+      borders.forEach((border) => {
+        result += border;
+      });
+    } else {
+      borders.forEach((border) => {
+        result += border;
+      });
+      result += framedLines;
+      borders.reverse();
+      borders.forEach((border) => {
+        result += border;
+      });
     }
-    return `${border}${framedLines}\n${border}`;
+    return result;
   };
 
   const copyResult = () => {
@@ -140,8 +206,9 @@
     const trigger = document.querySelector("#emoji-trigger");
     picker.togglePicker(trigger);
     picker.on("emoji", (selection) => {
-      emoji = selection.emoji;
+      emoji += selection.emoji;
       picker.destroyPicker();
+      splitEmojis();
       return true;
     });
   };
@@ -150,30 +217,31 @@
 <div class="main">
   <div class="hero min-h-screen bg-base-200">
     <div class="hero-content">
-      <div class="max-w-md">
-        <h1
-          on:click={() => location.reload()}
-          class="text-center text-5xl font-bold"
-        >
-          Framoji&nbsp;{emoji}
-        </h1>
-        <p class="text-center">Write inside an emoji frame.</p>
-        <p class="text-center">
-          <small><em>Click header to reload</em></small>
-        </p>
+      <div class="max-w-lg">
+        <nav class="heading" on:click={getInspired}>
+          <h1 class="text-center text-5xl font-bold">
+            Framoji{#if emojis[0]}&nbsp;{emojis[0]}{/if}
+          </h1>
+          <p class="text-center">Write inside an emoji frame.</p>
+          <p class="text-center">
+            <small><em>Click header to get inspired.</em></small>
+          </p>
+        </nav>
 
         <DeviceDetector showInDevice="desktop">
           <button
             class="btn btn-circle right-floated text-2xl"
             id="emoji-trigger"
             on:click={showEmojiPicker}
-            >{emoji}
+          >
+            🙂
           </button>
         </DeviceDetector>
-        <label class="label" for="emoji">Emoji</label>
+        <label class="label" for="emoji">Emoji(s)</label>
         <input
           type="text"
           bind:value={emoji}
+          on:input={splitEmojis}
           placeholder="Frame emoji"
           id="emoji"
           class="input input-bordered input-lg w-full max-w-xs"
@@ -231,8 +299,9 @@
 </div>
 
 <style>
-  h1 {
+  .heading {
     cursor: pointer;
+    user-select: none;
   }
   .right-floated {
     float: right;
