@@ -18,7 +18,7 @@
       message:
         "Some men see things as they are and ask, Why? I dream things that never were and ask, Why not?",
     },
-    { emoji: "🟨", message: "I need more sticky 🗒️" },
+    { emoji: "🟨", message: "I need more sticky notes" },
     { emoji: "🐈", message: "The Internet is made of 😸" },
     { emoji: "🙏", message: "May the force be with you" },
     { emoji: "💚", message: "Green is my favorite color" },
@@ -56,6 +56,7 @@
       message: "3️⃣ clicks select the all line",
     },
     { emoji: "🐢", message: "I like turtles" },
+    { emoji: "🦆", message: "What the duck?" },
   ];
   const randomIndex = Math.floor(Math.random() * inspirations.length);
   let { emoji, message } = inspirations[randomIndex];
@@ -73,7 +74,7 @@
     // console.log(length);
     return length;
   };
-  const spaceLength = visualLength("."); // width of a space char in pixels
+  const spaceLength = visualLength("-"); // width of a space char in pixels represented as a dash
   // console.log(spaceLength);
 
   $: result = () => {
@@ -101,7 +102,7 @@
     words.forEach((word, index) => {
       line += `${word} `;
       const lineLength = visualLength(line);
-      if (lineLength >= innerLength - 54 || index === words.length - 1) {
+      if (lineLength >= innerLength - 60 || index === words.length - 1) {
         // border each side or last word
         lines.push(line.trim());
         line = "";
@@ -241,5 +242,12 @@
   }
   .right-floated {
     float: right;
+  }
+  input,
+  textarea,
+  span {
+    font-size: 15px !important;
+    font-size: 15px !important;
+    white-space: nowrap !important;
   }
 </style>
