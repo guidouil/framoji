@@ -11,7 +11,7 @@
       message: "This is a test, keep scrolling as natural as possible.",
     },
     { emoji: "🍔", message: "I Can Has 🍔?" },
-    { emoji: "🌼🌻🌸", message: "Powered" },
+    { emoji: "🌼🌻🌸", message: "Power" },
     { emoji: "🍎", message: "An 🍏 a day keep the 🧑‍⚕️ away" },
     { emoji: "🔲", message: "This is not 🚀 science" },
     {
@@ -20,7 +20,7 @@
         "Some men see things as they are and ask, Why? I dream things that never were and ask, Why not?",
     },
     { emoji: "🟨", message: "I need more sticky notes" },
-    { emoji: "🐈", message: "The Internet is made of 😸" },
+    { emoji: "🐈", message: "The Internet is made of cats" },
     { emoji: "🟪", message: "May the force be with you" },
     { emoji: "💚", message: "Green is my favorite color" },
     {
@@ -29,7 +29,7 @@
     },
     { emoji: "❤️️", message: "Hold on, if ❤️️ is the answer your 🏠" },
     {
-      emoji: "🧐",
+      emoji: "🧐🥃",
       message: "I don't always use emojis, but when I do it's Framoji.",
     },
     { emoji: "🇺🇦", message: "Stop war" },
@@ -48,20 +48,25 @@
       message:
         "Life is like riding a 🚲. To keep your balance, you must keep moving.",
     },
-    { emoji: "🤪", message: "Stupid is as stupid does" },
+    { emoji: "🤪⁉️", message: "Stupid is as stupid does" },
     { emoji: "🦖", message: "Do You Think He Saurus?" },
-    { emoji: "🕵", message: "Who 👀 the Watchmen?" },
-    { emoji: "🍾", message: "Save 💦 drink Champagne" },
+    { emoji: "🕵🦸", message: "Who 👀 the Watchmen?" },
+    { emoji: "🍾🥂", message: "Save water drink Champagne" },
     {
       emoji: "🙋",
       message: "3️⃣ clicks select the all line",
     },
-    { emoji: "🐢", message: "I like turtles" },
-    { emoji: "🦆", message: "What the duck?" },
+    { emoji: "🧟‍♂️🎥", message: "I like 🐢" },
+    { emoji: "🦆❓", message: "What the duck?" },
+    { emoji: "🐈🐕", message: "It's raining" },
+    { emoji: "🥷🐢", message: "🍕" },
   ];
   let emoji;
   let message;
   let emojis;
+  let width = 9;
+  let showMargin = true;
+  const spaceLength = 4.2; // because 42 / 10 🤯
 
   const splitEmojis = () => {
     const splitter = new GraphemeSplitter();
@@ -80,10 +85,6 @@
     splitEmojis();
   };
   getInspired();
-
-  let width = 9;
-  let showMargin = false;
-  const spaceLength = 4.2; // because 42 / 10 🤯
 
   const visualLength = (line) => {
     const span = document.createElement("span");
@@ -145,7 +146,7 @@
     words.forEach((word, index) => {
       line += `${word} `;
       const lineLength = visualLength(line);
-      if (lineLength >= innerLength - 60 || index === words.length - 1) {
+      if (lineLength > innerLength - 60 || index === words.length - 1) {
         // border each side or last word
         lines.push(line.trim());
         line = "";
@@ -222,7 +223,7 @@
           <h1 class="text-center text-5xl font-bold">
             Framoji{#if emojis[0]}&nbsp;{emojis[0]}{/if}
           </h1>
-          <p class="text-center">Write inside an emoji frame.</p>
+          <p class="text-center">Write inside an emojis frame</p>
           <p class="text-center">
             <small><em>Click header to get inspired.</em></small>
           </p>
@@ -259,7 +260,7 @@
           class="textarea textarea-primary"
           name="result"
           id="result"
-          rows="6"
+          rows="8"
           cols={width * 2.7}
           value={result()}
         />
