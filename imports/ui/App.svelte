@@ -7,12 +7,12 @@
   const inspirations = [
     {
       emoji: "🖼️",
-      message: "This is a test, keep on scrolling as natural as possible.",
+      message: "This is a test, keep scrolling as natural as possible.",
     },
     { emoji: "🍔", message: "I Can Has 🍔?" },
     { emoji: "🌼", message: "🌼 powered" },
     { emoji: "🍎", message: "An 🍏 a day keep the 🧑‍⚕️ away" },
-    { emoji: "☄️", message: "This is not 🚀 science" },
+    { emoji: "🔲", message: "This is not 🚀 science" },
     {
       emoji: "🤔",
       message:
@@ -20,7 +20,7 @@
     },
     { emoji: "🟨", message: "I need more sticky notes" },
     { emoji: "🐈", message: "The Internet is made of 😸" },
-    { emoji: "🙏", message: "May the force be with you" },
+    { emoji: "🟪", message: "May the force be with you" },
     { emoji: "💚", message: "Green is my favorite color" },
     {
       emoji: "🌹",
@@ -31,7 +31,7 @@
       emoji: "🧐",
       message: "I don't always use emojis, but when I do it's Framoji.",
     },
-    { emoji: "🇺🇦", message: "🕊️ & ❤️" },
+    { emoji: "🇺🇦", message: "Stop war" },
     {
       emoji: "☁️",
       message: "There is no ☁️, it's just someone else's 💻",
@@ -63,6 +63,7 @@
 
   let width = 9;
   let showMargin = false;
+  const spaceLength = 4.2;
 
   const visualLength = (line) => {
     const span = document.createElement("span");
@@ -74,8 +75,6 @@
     // console.log(length);
     return length;
   };
-  const spaceLength = visualLength("-"); // width of a space char in pixels represented as a dash
-  // console.log(spaceLength);
 
   $: result = () => {
     // top and bottom borders
@@ -112,21 +111,16 @@
     let framedLines = "";
     if (lines && lines.length > 0) {
       lines.forEach((line) => {
-        let margeLeft = "";
+        let marge = "";
         let margeRight = "";
         const lineLength = visualLength(line);
         if (lineLength < innerLength) {
-          const margeLengthLeft = Math.round((innerLength - lineLength) / 2);
-          const margeLengthRight = Math.floor((innerLength - lineLength) / 2);
-          // console.log({ margeLengthLeft, margeLengthRight });
-          for (let i = 0; i < margeLengthLeft; i += spaceLength) {
-            margeLeft += " ";
-          }
-          for (let i = 0; i < margeLengthRight; i += spaceLength) {
-            margeRight += " ";
+          const margeLength = (innerLength - lineLength) / 2;
+          for (let i = 0; i < margeLength; i += spaceLength) {
+            marge += " ";
           }
         }
-        framedLines += `\n${emoji}${margeLeft}${line}${margeRight}${emoji}`;
+        framedLines += `\n${emoji}${marge}${line}${marge}${emoji}`;
       });
     }
     if (showMargin) {
@@ -170,7 +164,7 @@
 
         <DeviceDetector showInDevice="desktop">
           <button
-            class="btn btn-circle right-floated text-xl"
+            class="btn btn-circle right-floated text-2xl"
             id="emoji-trigger"
             on:click={showEmojiPicker}
             >{emoji}
@@ -182,7 +176,7 @@
           bind:value={emoji}
           placeholder="Frame emoji"
           id="emoji"
-          class="input input-bordered w-full max-w-xs"
+          class="input input-bordered input-lg w-full max-w-xs"
         />
 
         <label class="label" for="message">Message</label>
@@ -242,12 +236,5 @@
   }
   .right-floated {
     float: right;
-  }
-  input,
-  textarea,
-  span {
-    font-size: 15px !important;
-    font-size: 15px !important;
-    white-space: nowrap !important;
   }
 </style>
