@@ -63,7 +63,7 @@
 
   let width = 9;
   let showMargin = false;
-  const spaceLength = 4.2;
+  const spaceLength = 4.2; // because 42 / 10 🤯
 
   const visualLength = (line) => {
     const span = document.createElement("span");
