@@ -5,66 +5,8 @@
   import copy from "clipboard-copy";
   import GraphemeSplitter from "grapheme-splitter";
 
-  const inspirations = [
-    {
-      emoji: "🖼️",
-      message: "This is a test, keep scrolling as natural as possible.",
-    },
-    { emoji: "🍔", message: "I Can Has 🍔?" },
-    { emoji: "🌼🌻🌸", message: "Power" },
-    { emoji: "🍎", message: "An 🍏 a day keep the 🧑‍⚕️ away" },
-    { emoji: "🔲", message: "This is not 🚀 science" },
-    {
-      emoji: "🤔",
-      message:
-        "Some men see things as they are and ask, Why? I dream things that never were and ask, Why not?",
-    },
-    { emoji: "🟨🟨🟨", message: "I need more sticky notes" },
-    { emoji: "🐈", message: "The Internet is made of cats" },
-    { emoji: "🟪", message: "May the force be with you" },
-    { emoji: "💚", message: "Green is my favorite color" },
-    {
-      emoji: "💐🌹",
-      message: "Roses are 🔴, Violets are 🔵. I like 🌧️, got no 🔍.",
-    },
-    { emoji: "❤️️", message: "Hold on, if ❤️️ is the answer your 🏠" },
-    {
-      emoji: "🧐🥃",
-      message: "I don't always use emojis, but when I do it's Framoji.",
-    },
-    { emoji: "🇺🇦", message: "Stop war" },
-    {
-      emoji: "☁️",
-      message: "There is no ☁️, it's just someone else's 💻",
-    },
-    { emoji: "🤖", message: "I'm sorry, Dave. I'm afraid I can't do that." },
-    {
-      emoji: "💍",
-      message:
-        "One 💍 to rule them all, One 💍 to find them, One 💍 to bring them all and in the darkness bind them.",
-    },
-    {
-      emoji: "🚲",
-      message:
-        "Life is like riding a 🚲. To keep your balance, you must keep moving.",
-    },
-    { emoji: "🤪⁉️", message: "Stupid is as stupid does" },
-    { emoji: "🦖", message: "Do You Think He Saurus?" },
-    { emoji: "🕵🦸", message: "Who 👀 the 🦸?" },
-    { emoji: "🥂", message: "Save 🚰 Drink 🍾" },
-    {
-      emoji: "🙋",
-      message: "3️⃣ clicks select the all line",
-    },
-    { emoji: "🧟‍♂️🎥", message: "I like 🐢" },
-    { emoji: "🦆❓", message: "What the duck?" },
-    { emoji: "🐈🐕", message: "It's raining" },
-    { emoji: "🥷🐢", message: "🍕" },
-    { emoji: "🍑🍆", message: "Eat 5 fruits and vegetables every day" },
-    { emoji: "🍰🤥", message: "The cake is a lie" },
-    { emoji: "🐇🕳️", message: "Follow the white 🐰" },
-    { emoji: "🙈🙉🙊", message: "😈" },
-  ];
+  import { inspirations } from "../api/inspirations.js";
+
   let emoji;
   let message;
   let emojis;
@@ -97,7 +39,6 @@
     document.body.appendChild(span);
     const length = span.offsetWidth;
     document.body.removeChild(span);
-    // console.log(length);
     return length;
   };
 
@@ -131,8 +72,6 @@
     const borderLength = visualLength(borders[0]);
     const emojiLength = visualLength(emoji);
     const innerLength = borderLength - emojiLength * 2;
-    // console.log({ borderLength, emojiLength, innerLength });
-
     // top and botton margins
     let margin = `${emoji}`;
     for (let i = 0; i < innerLength; i += spaceLength) {
@@ -232,7 +171,6 @@
             <small><em>Click header to get inspired.</em></small>
           </p>
         </nav>
-
         <DeviceDetector showInDevice="desktop">
           <button
             class="btn btn-circle right-floated text-2xl"
@@ -247,18 +185,18 @@
           type="text"
           bind:value={emoji}
           on:input={splitEmojis}
-          placeholder="Frame emoji"
-          id="emoji"
           class="input input-bordered input-lg w-full max-w-xs"
+          id="emoji"
+          placeholder="Frame emojis"
         />
-
         <label class="label" for="message">Message</label>
         <textarea
           class="textarea w-full max-w-xs"
           bind:value={message}
+          id="message"
           rows="2"
+          placeholder="Text inside the frame"
         />
-
         <label class="label" for="result">Result</label>
         <textarea
           class="textarea textarea-primary"
@@ -275,7 +213,6 @@
         <p class="text-center">
           <small>You can edit the result before copy.</small>
         </p>
-
         <label class="label" for="width">Width ({width})</label>
         <input
           type="range"
@@ -291,7 +228,6 @@
             <span class="label-text">Top and bottom margin</span>
           </label>
         </div>
-
         <div class="divider" />
         <p class="text-center">
           <a href="https://github.com/guidouil/framoji" target="_blank">
