@@ -42,6 +42,31 @@
     return length;
   };
 
+  const replacePointingEmojis = (emojisString, direction) => {
+    switch (direction) {
+      case "right":
+        return emojisString
+          .replaceAll("👇", "👉")
+          .replaceAll("⬇️", "➡️")
+          .replaceAll("🔽", "▶️")
+          .replaceAll("⏬", "⏩");
+      case "left":
+        return emojisString
+          .replaceAll("👇", "👈")
+          .replaceAll("⬇️", "⬅️")
+          .replaceAll("🔽", "◀️")
+          .replaceAll("⏬", "⏪");
+      case "up":
+        return emojisString
+          .replaceAll("👇", "👆")
+          .replaceAll("⬇️", "⬆️")
+          .replaceAll("🔽", "🔼")
+          .replaceAll("⏬", "⏫");
+      default:
+        return emojisString;
+    }
+  };
+
   $: result = () => {
     let result = "";
     // top and bottom borders
@@ -72,22 +97,12 @@
     const borderLength = visualLength(borders[0]);
     const emojiLength = visualLength(emoji);
     const innerLength = borderLength - emojiLength * 2;
-    let margin = emojis
-      .join("")
-      .replaceAll("👇", "👉")
-      .replaceAll("⬇️", "➡️")
-      .replaceAll("🔽", "▶️")
-      .replaceAll("⏬", "⏩");
+    let margin = replacePointingEmojis(emojis.join(""), "right");
     for (let i = 0; i < innerLength; i += spaceLength) {
       margin += " ";
     }
     emojis.reverse();
-    margin += emojis
-      .join("")
-      .replaceAll("👇", "👈")
-      .replaceAll("⬇️", "⬅️")
-      .replaceAll("🔽", "◀️")
-      .replaceAll("⏬", "⏪");
+    margin += replacePointingEmojis(emojis.join(""), "left");
     emojis.reverse();
     margin += "\n";
     // cut message in lines
@@ -116,53 +131,28 @@
             marge += " ";
           }
         }
-        framedLine += emojis
-          .join("")
-          .replaceAll("👇", "👉")
-          .replaceAll("⬇️", "➡️")
-          .replaceAll("🔽", "▶️")
-          .replaceAll("⏬", "⏩");
+        framedLine += replacePointingEmojis(emojis.join(""), "right");
         framedLine += `${marge}${line}${marge}`;
         emojis.reverse();
-        framedLine += emojis
-          .join("")
-          .replaceAll("👇", "👈")
-          .replaceAll("⬇️", "⬅️")
-          .replaceAll("🔽", "◀️")
-          .replaceAll("⏬", "⏪");
+        framedLine += replacePointingEmojis(emojis.join(""), "left");
         emojis.reverse();
         framedLines += `${framedLine}\n`;
       });
     }
+    borders.forEach((border) => {
+      result += border;
+    });
     if (showMargin) {
-      borders.forEach((border) => {
-        result += border;
-      });
       result += margin;
-      result += framedLines;
-      result += margin;
-      borders.reverse();
-      borders.forEach((border) => {
-        result += border
-          .replaceAll("👇", "👆")
-          .replaceAll("⬇️", "⬆️")
-          .replaceAll("🔽", "🔼")
-          .replaceAll("⏬", "⏫");
-      });
-    } else {
-      borders.forEach((border) => {
-        result += border;
-      });
-      result += framedLines;
-      borders.reverse();
-      borders.forEach((border) => {
-        result += border
-          .replaceAll("👇", "👆")
-          .replaceAll("⬇️", "⬆️")
-          .replaceAll("🔽", "🔼")
-          .replaceAll("⏬", "⏫");
-      });
     }
+    result += framedLines;
+    if (showMargin) {
+      result += margin;
+    }
+    borders.reverse();
+    borders.forEach((border) => {
+      result += replacePointingEmojis(border, "up");
+    });
     return result;
   };
 
