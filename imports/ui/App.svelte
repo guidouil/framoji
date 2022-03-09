@@ -49,19 +49,27 @@
           .replaceAll("👇", "👉")
           .replaceAll("⬇️", "➡️")
           .replaceAll("🔽", "▶️")
-          .replaceAll("⏬", "⏩");
+          .replaceAll("⏬", "⏩")
+          .replaceAll("⏯️", "⏭️")
+          .replaceAll("↕️", "↔️")
+          .replaceAll("⤵️", "↪️");
       case "left":
         return emojisString
           .replaceAll("👇", "👈")
           .replaceAll("⬇️", "⬅️")
           .replaceAll("🔽", "◀️")
-          .replaceAll("⏬", "⏪");
+          .replaceAll("⏬", "⏪")
+          .replaceAll("⏯️", "⏮️")
+          .replaceAll("↕️", "↔️")
+          .replaceAll("⤵️", "↩️");
       case "up":
         return emojisString
           .replaceAll("👇", "👆")
           .replaceAll("⬇️", "⬆️")
           .replaceAll("🔽", "🔼")
-          .replaceAll("⏬", "⏫");
+          .replaceAll("⏬", "⏫")
+          .replaceAll("⏯️", "⏏️")
+          .replaceAll("⤵️", "⤴️");
       default:
         return emojisString;
     }
