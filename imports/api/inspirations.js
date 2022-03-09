@@ -57,4 +57,5 @@ export const inspirations = [
   { emoji: "🍰🤥", message: "The cake is a lie" },
   { emoji: "🐇🕳️", message: "Follow the white 🐰" },
   { emoji: "🙈🙉🙊", message: "😈" },
+  { emoji: "👇", message: "This is the way" },
 ];
