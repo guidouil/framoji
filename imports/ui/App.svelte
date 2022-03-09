@@ -56,9 +56,9 @@
           .replaceAll("⬇️", "➡️")
           .replaceAll("🔽", "▶️")
           .replaceAll("⏬", "⏩")
-          .replaceAll("⏯️", "⏭️")
-          .replaceAll("↕️", "↔️")
-          .replaceAll("⤵️", "↪️");
+          .replaceAll("▶️", "⏭️")
+          .replaceAll("⤵️", "↪️")
+          .replaceAll("↕️", "↔️");
         break;
       case "left":
         result = emojisString
@@ -66,9 +66,9 @@
           .replaceAll("⬇️", "⬅️")
           .replaceAll("🔽", "◀️")
           .replaceAll("⏬", "⏪")
-          .replaceAll("⏯️", "⏮️")
-          .replaceAll("↕️", "↔️")
-          .replaceAll("⤵️", "↩️");
+          .replaceAll("▶️", "⏮️")
+          .replaceAll("⤵️", "↩️")
+          .replaceAll("↕️", "↔️");
         break;
       case "up":
         result = emojisString
@@ -76,7 +76,7 @@
           .replaceAll("⬇️", "⬆️")
           .replaceAll("🔽", "🔼")
           .replaceAll("⏬", "⏫")
-          .replaceAll("⏯️", "⏏️")
+          .replaceAll("▶️", "⏏️")
           .replaceAll("⤵️", "⤴️");
         break;
       default:
@@ -90,7 +90,6 @@
       result = replaceAt(result, result.indexOf("⬆️"), "↗️");
       result = replaceAt(result, result.lastIndexOf("⬆️"), "↖️");
     }
-    console.log(result);
     return result;
   };
 
