@@ -261,7 +261,7 @@
         <label class="label" for="width">Width ({width})</label>
         <input
           type="range"
-          min="4"
+          min="3"
           max="42"
           bind:value={width}
           class="range range-accent"
