@@ -72,12 +72,22 @@
     const borderLength = visualLength(borders[0]);
     const emojiLength = visualLength(emoji);
     const innerLength = borderLength - emojiLength * 2;
-    let margin = emojis.join("").replaceAll("👇", "👉").replaceAll("⬇️", "➡️");
+    let margin = emojis
+      .join("")
+      .replaceAll("👇", "👉")
+      .replaceAll("⬇️", "➡️")
+      .replaceAll("🔽", "▶️")
+      .replaceAll("⏬", "⏩");
     for (let i = 0; i < innerLength; i += spaceLength) {
       margin += " ";
     }
     emojis.reverse();
-    margin += emojis.join("").replaceAll("👇", "👈").replaceAll("⬇️", "⬅️");
+    margin += emojis
+      .join("")
+      .replaceAll("👇", "👈")
+      .replaceAll("⬇️", "⬅️")
+      .replaceAll("🔽", "◀️")
+      .replaceAll("⏬", "⏪");
     emojis.reverse();
     margin += "\n";
     // cut message in lines
@@ -109,13 +119,17 @@
         framedLine += emojis
           .join("")
           .replaceAll("👇", "👉")
-          .replaceAll("⬇️", "➡️");
+          .replaceAll("⬇️", "➡️")
+          .replaceAll("🔽", "▶️")
+          .replaceAll("⏬", "⏩");
         framedLine += `${marge}${line}${marge}`;
         emojis.reverse();
         framedLine += emojis
           .join("")
           .replaceAll("👇", "👈")
-          .replaceAll("⬇️", "⬅️");
+          .replaceAll("⬇️", "⬅️")
+          .replaceAll("🔽", "◀️")
+          .replaceAll("⏬", "⏪");
         emojis.reverse();
         framedLines += `${framedLine}\n`;
       });
@@ -129,7 +143,11 @@
       result += margin;
       borders.reverse();
       borders.forEach((border) => {
-        result += border.replaceAll("👇", "👆").replaceAll("⬇️", "⬆️");
+        result += border
+          .replaceAll("👇", "👆")
+          .replaceAll("⬇️", "⬆️")
+          .replaceAll("🔽", "🔼")
+          .replaceAll("⏬", "⏫");
       });
     } else {
       borders.forEach((border) => {
@@ -138,7 +156,11 @@
       result += framedLines;
       borders.reverse();
       borders.forEach((border) => {
-        result += border.replaceAll("👇", "👆");
+        result += border
+          .replaceAll("👇", "👆")
+          .replaceAll("⬇️", "⬆️")
+          .replaceAll("🔽", "🔼")
+          .replaceAll("⏬", "⏫");
       });
     }
     return result;
@@ -156,6 +178,8 @@
     picker.togglePicker(trigger);
     picker.on("emoji", (selection) => {
       emoji += selection.emoji;
+      copy(selection.emoji);
+      vanillaToast.success("Emoji copied");
       picker.destroyPicker();
       splitEmojis();
       return true;
