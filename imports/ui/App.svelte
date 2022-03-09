@@ -72,12 +72,12 @@
     const borderLength = visualLength(borders[0]);
     const emojiLength = visualLength(emoji);
     const innerLength = borderLength - emojiLength * 2;
-    let margin = emojis.join("").replaceAll("👇", "👉");
+    let margin = emojis.join("").replaceAll("👇", "👉").replaceAll("⬇️", "➡️");
     for (let i = 0; i < innerLength; i += spaceLength) {
       margin += " ";
     }
     emojis.reverse();
-    margin += emojis.join("").replaceAll("👇", "👈");
+    margin += emojis.join("").replaceAll("👇", "👈").replaceAll("⬇️", "⬅️");
     emojis.reverse();
     margin += "\n";
     // cut message in lines
@@ -106,10 +106,16 @@
             marge += " ";
           }
         }
-        framedLine += emojis.join("").replaceAll("👇", "👉");
+        framedLine += emojis
+          .join("")
+          .replaceAll("👇", "👉")
+          .replaceAll("⬇️", "➡️");
         framedLine += `${marge}${line}${marge}`;
         emojis.reverse();
-        framedLine += emojis.join("").replaceAll("👇", "👈");
+        framedLine += emojis
+          .join("")
+          .replaceAll("👇", "👈")
+          .replaceAll("⬇️", "⬅️");
         emojis.reverse();
         framedLines += `${framedLine}\n`;
       });
@@ -123,7 +129,7 @@
       result += margin;
       borders.reverse();
       borders.forEach((border) => {
-        result += border.replaceAll("👇", "👆");
+        result += border.replaceAll("👇", "👆").replaceAll("⬇️", "⬆️");
       });
     } else {
       borders.forEach((border) => {
