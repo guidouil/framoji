@@ -54,9 +54,9 @@
         result = emojisString
           .replaceAll("👇", "👉")
           .replaceAll("⬇️", "➡️")
+          .replaceAll("▶️", "⏭️")
           .replaceAll("🔽", "▶️")
           .replaceAll("⏬", "⏩")
-          .replaceAll("▶️", "⏭️")
           .replaceAll("⤵️", "↪️")
           .replaceAll("↕️", "↔️");
         break;
@@ -64,9 +64,9 @@
         result = emojisString
           .replaceAll("👇", "👈")
           .replaceAll("⬇️", "⬅️")
+          .replaceAll("▶️", "⏮️")
           .replaceAll("🔽", "◀️")
           .replaceAll("⏬", "⏪")
-          .replaceAll("▶️", "⏮️")
           .replaceAll("⤵️", "↩️")
           .replaceAll("↕️", "↔️");
         break;
@@ -74,9 +74,9 @@
         result = emojisString
           .replaceAll("👇", "👆")
           .replaceAll("⬇️", "⬆️")
+          .replaceAll("▶️", "⏏️")
           .replaceAll("🔽", "🔼")
           .replaceAll("⏬", "⏫")
-          .replaceAll("▶️", "⏏️")
           .replaceAll("⤵️", "⤴️");
         break;
       default:
