@@ -7,6 +7,11 @@
 
   import { inspirations } from "../api/inspirations.js";
 
+  const replaceAt = (string, index, replacement) =>
+    `${string.substr(0, index)}${replacement}${string.substr(
+      index + replacement.length
+    )}`;
+
   let emoji;
   let message;
   let emojis;
@@ -43,9 +48,10 @@
   };
 
   const replacePointingEmojis = (emojisString, direction) => {
+    let result = emojisString;
     switch (direction) {
       case "right":
-        return emojisString
+        result = emojisString
           .replaceAll("👇", "👉")
           .replaceAll("⬇️", "➡️")
           .replaceAll("🔽", "▶️")
@@ -53,8 +59,9 @@
           .replaceAll("⏯️", "⏭️")
           .replaceAll("↕️", "↔️")
           .replaceAll("⤵️", "↪️");
+        break;
       case "left":
-        return emojisString
+        result = emojisString
           .replaceAll("👇", "👈")
           .replaceAll("⬇️", "⬅️")
           .replaceAll("🔽", "◀️")
@@ -62,17 +69,29 @@
           .replaceAll("⏯️", "⏮️")
           .replaceAll("↕️", "↔️")
           .replaceAll("⤵️", "↩️");
+        break;
       case "up":
-        return emojisString
+        result = emojisString
           .replaceAll("👇", "👆")
           .replaceAll("⬇️", "⬆️")
           .replaceAll("🔽", "🔼")
           .replaceAll("⏬", "⏫")
           .replaceAll("⏯️", "⏏️")
           .replaceAll("⤵️", "⤴️");
+        break;
       default:
-        return emojisString;
+        break;
     }
+    if (result.indexOf("⬇️") !== -1) {
+      result = replaceAt(result, result.indexOf("⬇️"), "↘️");
+      result = replaceAt(result, result.lastIndexOf("⬇️"), "↙️");
+    }
+    if (result.indexOf("⬆️") !== -1) {
+      result = replaceAt(result, result.indexOf("⬆️"), "↗️");
+      result = replaceAt(result, result.lastIndexOf("⬆️"), "↖️");
+    }
+    console.log(result);
+    return result;
   };
 
   $: result = () => {
@@ -148,7 +167,7 @@
       });
     }
     borders.forEach((border) => {
-      result += border;
+      result += replacePointingEmojis(border, "down");
     });
     if (showMargin) {
       result += margin;
