@@ -16,8 +16,7 @@
   let message;
   let emojis;
   let width = 9;
-  let showMargin = true;
-  const spaceLength = 4.2; // because 42 / 10 🤯
+  let showMargin = false;
 
   const splitEmojis = () => {
     const splitter = new GraphemeSplitter();
@@ -46,6 +45,8 @@
     document.body.removeChild(span);
     return length;
   };
+  const spaceLength = visualLength("_ _") - visualLength("__");
+  console.log(spaceLength);
 
   const replacePointingEmojis = (emojisString, direction) => {
     let result = emojisString;
@@ -124,7 +125,7 @@
     const emojiLength = visualLength(emoji);
     const innerLength = borderLength - emojiLength * 2;
     let margin = replacePointingEmojis(emojis.join(""), "right");
-    for (let i = 0; i < innerLength; i += spaceLength) {
+    for (let i = 0; i < innerLength - spaceLength; i += spaceLength) {
       margin += " ";
     }
     emojis.reverse();
@@ -138,7 +139,12 @@
     words.forEach((word, index) => {
       line += `${word} `;
       const lineLength = visualLength(line);
-      if (lineLength > innerLength - 60 || index === words.length - 1) {
+      if (
+        (words[index + 1] &&
+          visualLength(words[index + 1]) + lineLength + 4 * spaceLength >
+            innerLength) ||
+        index === words.length - 1 // last word
+      ) {
         // border each side or last word
         lines.push(line.trim());
         line = "";
@@ -234,6 +240,7 @@
           id="emoji"
           placeholder="Frame emojis"
         />
+        <p class="text-center">try 👇 and ⬇️</p>
         <label class="label" for="message">Message</label>
         <textarea
           class="textarea w-full max-w-xs"
