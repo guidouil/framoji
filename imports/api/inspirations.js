@@ -59,4 +59,5 @@ export const inspirations = [
   { emoji: "🙈🙉🙊", message: "😈" },
   { emoji: "👇", message: "This is the way" },
   { emoji: "⬇️", message: "Do you know Daway?" },
+  { emoji: "▶️", message: "Now playing" },
 ];

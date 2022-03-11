@@ -46,9 +46,14 @@
     return length;
   };
   const spaceLength = visualLength("_ _") - visualLength("__");
-  console.log(spaceLength);
+  // console.log({ spaceLength });
 
   const replacePointingEmojis = (emojisString, direction) => {
+    const emojisToReplace = ["👇", "⬇️", "▶️", "🔽", "⏬", "⤵️", "↕️"];
+    const found = emojisToReplace.some((emojiToReplace) =>
+      emojis.includes(emojiToReplace)
+    );
+    if (!found) return emojisString;
     let result = emojisString;
     switch (direction) {
       case "right":
