@@ -46,7 +46,6 @@
     return length;
   };
   const spaceLength = visualLength("_ _") - visualLength("__");
-  // console.log({ spaceLength });
 
   const replacePointingEmojis = (emojisString, direction) => {
     const emojisToReplace = ["👇", "⬇️", "▶️", "🔽", "⏬", "⤵️", "↕️"];

@@ -12,7 +12,7 @@ export const inspirations = [
     message:
       "Some men see things as they are and ask, Why? I dream things that never were and ask, Why not?",
   },
-  { emoji: "🟨🟨🟨", message: "I need more sticky notes" },
+  { emoji: "🟨🟨", message: "I need more sticky notes" },
   { emoji: "🐈", message: "The Internet is made of cats" },
   { emoji: "🟪", message: "May the force be with you" },
   { emoji: "💚", message: "Green is my favorite color" },
@@ -58,6 +58,7 @@ export const inspirations = [
   { emoji: "🐇🕳️", message: "Follow the white 🐰" },
   { emoji: "🙈🙉🙊", message: "😈" },
   { emoji: "👇", message: "This is the way" },
-  { emoji: "⬇️", message: "Do you know Daway?" },
+  { emoji: "⬇️", message: "Do you know Dawae?" },
   { emoji: "▶️", message: "Now playing" },
+  { emoji: "🔽⤵️⏬⬇️", message: "📌" },
 ];
