@@ -7,6 +7,8 @@
 
   import { inspirations } from "../api/inspirations.js";
 
+  import NavBar from "./NavBar.svelte";
+
   const replaceAt = (string, index, replacement) =>
     `${string.substr(0, index)}${replacement}${string.substr(
       index + replacement.length
@@ -213,19 +215,11 @@
   };
 </script>
 
-<div class="main">
-  <div class="hero min-h-screen bg-base-200">
+<div class="main min-h-screen bg-base-200">
+  <NavBar {emojis} {getInspired} />
+  <div class="hero">
     <div class="hero-content">
       <div class="max-w-lg">
-        <nav class="heading" on:click={getInspired}>
-          <h1 class="text-center text-5xl font-bold">
-            Framoji{#if emojis[0]}&nbsp;{emojis[0]}{/if}
-          </h1>
-          <p class="text-center">Write inside an emojis frame</p>
-          <p class="text-center">
-            <small><em>Click header to get inspired.</em></small>
-          </p>
-        </nav>
         <DeviceDetector showInDevice="desktop">
           <button
             class="btn btn-circle right-floated text-2xl"
@@ -235,7 +229,9 @@
             🙂
           </button>
         </DeviceDetector>
-        <label class="label" for="emoji">Emoji(s)</label>
+        <label class="label" for="emoji">
+          Emoji(s) for the frame <br />
+        </label>
         <input
           type="text"
           bind:value={emoji}
@@ -244,13 +240,17 @@
           id="emoji"
           placeholder="Frame emojis"
         />
-        <p class="text-center">try 👇 and ⬇️</p>
-        <label class="label" for="message">Message</label>
+        <label class="label" for="emoji">
+          <span class="label-text-alt" />
+          <span class="label-text-alt">Try 👇 and ⬇️</span>
+        </label>
+        <p class="text-center" />
+        <label class="label" for="message">Message in the frame</label>
         <textarea
           class="textarea w-full max-w-xs"
           bind:value={message}
           id="message"
-          rows="2"
+          rows="3"
           placeholder="Text inside the frame"
         />
         <label class="label" for="result">Result</label>
@@ -258,7 +258,7 @@
           class="textarea textarea-primary"
           name="result"
           id="result"
-          rows="8"
+          rows="9"
           cols={width * 2.7}
           value={result()}
         />
@@ -284,10 +284,15 @@
             <span class="label-text">Top and bottom margin</span>
           </label>
         </div>
+
         <div class="divider" />
         <p class="text-center">
-          <a href="https://github.com/guidouil/framoji" target="_blank">
-            GitHub
+          <a
+            class="link"
+            href="https://github.com/guidouil/framoji"
+            target="_blank"
+          >
+            View source
           </a>
         </p>
       </div>

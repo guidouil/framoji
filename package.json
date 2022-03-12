@@ -17,6 +17,7 @@
     "postcss": "^8.4.8",
     "svelte": "^3.46.4",
     "svelte-device-detector": "^0.2.2",
+    "theme-change": "^2.0.2",
     "vanilla-toast": "^0.5.0"
   },
   "meteor": {
