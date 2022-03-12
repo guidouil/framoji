@@ -10,15 +10,16 @@
   import NavBar from "./NavBar.svelte";
 
   const replaceAt = (string, index, replacement) =>
-    `${string.substr(0, index)}${replacement}${string.substr(
-      index + replacement.length
-    )}`;
+    string.substr(0, index) +
+    replacement +
+    string.substr(index + replacement.length);
 
   let emoji;
-  let message;
   let emojis;
+  let message;
   let width = 9;
   let showMargin = false;
+  let currentIndex;
 
   const splitEmojis = () => {
     const splitter = new GraphemeSplitter();
@@ -31,9 +32,9 @@
   };
 
   const getInspired = () => {
-    const randomIndex = Math.floor(Math.random() * inspirations.length);
-    emoji = inspirations[randomIndex].emoji;
-    message = inspirations[randomIndex].message;
+    currentIndex = Math.floor(Math.random() * inspirations.length);
+    emoji = inspirations[currentIndex].emoji;
+    message = inspirations[currentIndex].message;
     splitEmojis();
   };
   getInspired();
@@ -213,95 +214,128 @@
       return true;
     });
   };
+
+  const setInspiration = (index) => {
+    currentIndex = index;
+    emoji = inspirations[index].emoji;
+    message = inspirations[index].message;
+    splitEmojis();
+  };
 </script>
 
 <div class="main min-h-screen bg-base-200">
   <NavBar {emojis} {getInspired} />
-  <div class="hero">
-    <div class="hero-content">
-      <div class="max-w-lg">
-        <DeviceDetector showInDevice="desktop">
-          <button
-            class="btn btn-circle right-floated text-2xl"
-            id="emoji-trigger"
-            on:click={showEmojiPicker}
-          >
-            🙂
-          </button>
-        </DeviceDetector>
-        <label class="label" for="emoji">
-          Emoji(s) for the frame <br />
-        </label>
-        <input
-          type="text"
-          bind:value={emoji}
-          on:input={splitEmojis}
-          class="input input-bordered input-lg w-full max-w-xs"
-          id="emoji"
-          placeholder="Frame emojis"
-        />
-        <label class="label" for="emoji">
-          <span class="label-text-alt" />
-          <span class="label-text-alt">Try 👇 and ⬇️</span>
-        </label>
-        <p class="text-center" />
-        <label class="label" for="message">Message in the frame</label>
-        <textarea
-          class="textarea w-full max-w-xs"
-          bind:value={message}
-          id="message"
-          rows="3"
-          placeholder="Text inside the frame"
-        />
-        <label class="label" for="result">Result</label>
-        <textarea
-          class="textarea textarea-primary"
-          name="result"
-          id="result"
-          rows="9"
-          cols={width * 2.7}
-          value={result()}
-        />
-        <br />
-        <button class="btn btn-primary btn-wide w-full" on:click={copyResult}>
-          Copy result
-        </button>
-        <p class="text-center">
-          <small>You can edit the result before copy.</small>
-        </p>
-        <label class="label" for="width">Width ({width})</label>
-        <input
-          type="range"
-          min="3"
-          max="42"
-          bind:value={width}
-          class="range range-accent"
-          id="width"
-        />
-        <div class="form-control">
-          <label class="label cursor-pointer">
-            <input type="checkbox" class="toggle" bind:checked={showMargin} />
-            <span class="label-text">Top and bottom margin</span>
+  <div class="flex items-center justify-center mt-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- First column -->
+      <div class="max-w-xs">
+        <div class="md:sticky md:top-0">
+          <DeviceDetector showInDevice="desktop">
+            <button
+              class="btn btn-circle right-floated text-2xl"
+              id="emoji-trigger"
+              on:click={showEmojiPicker}
+            >
+              🙂
+            </button>
+          </DeviceDetector>
+          <label class="label" for="emoji">
+            Emoji(s) for the frame <br />
           </label>
+          <input
+            type="text"
+            bind:value={emoji}
+            on:input={splitEmojis}
+            class="input input-bordered input-lg w-full max-w-xs"
+            id="emoji"
+            placeholder="Frame emojis"
+          />
+          <label class="label" for="emoji">
+            <span class="label-text-alt" />
+            <span class="label-text-alt">Try 👇 and ⬇️</span>
+          </label>
+          <p class="text-center" />
+          <label class="label" for="message">Message in the frame</label>
+          <textarea
+            class="textarea w-full max-w-xs"
+            bind:value={message}
+            id="message"
+            rows="3"
+            placeholder="Text inside the frame"
+          />
+          <label class="label" for="result">Result</label>
+          <textarea
+            class="textarea textarea-primary w-full max-w-xs"
+            name="result"
+            id="result"
+            rows="9"
+            value={result()}
+          />
+          <br />
+          <button class="btn btn-primary btn-wide w-full" on:click={copyResult}>
+            Copy result
+          </button>
+          <p class="text-center">
+            <small>You can edit the result before copy.</small>
+          </p>
+          <label class="label" for="width">Width ({width})</label>
+          <input
+            type="range"
+            min="3"
+            max="42"
+            bind:value={width}
+            class="range range-accent"
+            id="width"
+          />
+          <div class="form-control">
+            <label class="label cursor-pointer">
+              <input type="checkbox" class="toggle" bind:checked={showMargin} />
+              <span class="label-text">Top and bottom margin</span>
+            </label>
+          </div>
         </div>
-
-        <div class="divider" />
-        <p class="text-center">
-          <a
-            class="link"
-            href="https://github.com/guidouil/framoji"
-            target="_blank"
-          >
-            View source
-          </a>
-        </p>
+      </div>
+      <!-- Second column -->
+      <div class="max-w-md">
+        <div class="overflow-x-auto">
+          <h2 class="text-xl">Inspirations 👇</h2>
+          <table class="table w-full">
+            <!-- head -->
+            <thead>
+              <tr>
+                <th>Emoji(s)</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- rows -->
+              {#each inspirations as { emoji, message }, index}
+                <tr
+                  class="hover"
+                  class:active={index === currentIndex}
+                  on:click={() => setInspiration(index)}
+                >
+                  <td>{emoji}</td>
+                  <td>{message}</td>
+                </tr>
+              {/each}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
+  <div class="divider" />
+  <p class="text-center">
+    <a class="link" href="https://github.com/guidouil/framoji" target="_blank">
+      View source
+    </a>
+  </p>
+  <br />
 </div>
 
 <style>
-  .heading {
+  tr {
     cursor: pointer;
     user-select: none;
   }
