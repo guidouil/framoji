@@ -228,7 +228,7 @@
   <div class="flex items-center justify-center mt-2">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <!-- First column -->
-      <div class="max-w-xs">
+      <div class="max-w-xs mx-auto">
         <div class="md:sticky md:top-0">
           <DeviceDetector showInDevice="desktop">
             <button
