@@ -1,4 +1,5 @@
 export const inspirations = [
+  { emoji: "🇺🇦", message: "Stop war" },
   {
     emoji: "🖼️",
     message: "This is a test, keep scrolling as natural as possible.",
@@ -29,7 +30,6 @@ export const inspirations = [
     emoji: "🧐🥃",
     message: "I don't always use emojis, but when I do it's Framoji.",
   },
-  { emoji: "🇺🇦", message: "Stop war" },
   {
     emoji: "☁️",
     message: "There is no ☁️, it's just someone else's 💻",

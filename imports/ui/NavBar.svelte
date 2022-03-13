@@ -16,7 +16,7 @@
   <nav class="navbar bg-base-100">
     <div class="flex-1">
       <div class="btn btn-ghost normal-case text-5xl" on:click={getInspired}>
-        Framoji{#if emojis[0]}&nbsp;{emojis[0]}{/if}
+        Framoji{#if emojis && emojis[0]}&nbsp;{emojis[0]}{/if}
       </div>
     </div>
     <div class="flex-none">

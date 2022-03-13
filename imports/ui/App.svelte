@@ -6,7 +6,8 @@
   import GraphemeSplitter from "grapheme-splitter";
 
   import { initializeApp } from "firebase/app";
-  import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+  import { getFirestore } from "firebase/firestore/lite";
+  import { ref, set } from "firebase/database";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCxfEDdH1fbkRp_VRWTHLRwclxGuXLoYy4",
@@ -18,15 +19,6 @@
   };
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-
-  async function getInspirations(db) {
-    const inspirationsCol = collection(db, "inspirations");
-    const inspirationsSnapshot = await getDocs(inspirationsCol);
-    const inspirationsList = inspirationsSnapshot.docs.map((doc) => doc.data());
-    return inspirationsList;
-  }
-  const inspirationspromise = getInspirations(db);
-  console.log(inspirationspromise);
 
   import { inspirations } from "../api/inspirations.js";
 
@@ -55,10 +47,17 @@
   };
 
   const getInspired = () => {
-    currentIndex = Math.floor(Math.random() * inspirations.length);
-    emoji = inspirations[currentIndex].emoji;
-    message = inspirations[currentIndex].message;
-    splitEmojis();
+    if (inspirations && inspirations.length > 0) {
+      let newIndex = Math.floor(Math.random() * inspirations.length);
+      if (newIndex === currentIndex) {
+        getInspired();
+      } else {
+        currentIndex = newIndex;
+      }
+      emoji = inspirations[currentIndex].emoji;
+      message = inspirations[currentIndex].message;
+      splitEmojis();
+    }
   };
   getInspired();
 
@@ -244,6 +243,18 @@
     message = inspirations[index].message;
     splitEmojis();
   };
+
+  const submitInspiration = () => {
+    const author = prompt("What is your name/pseudo?");
+    if (author) {
+      // set(ref(db, "inspirations"), {
+      //   emoji,
+      //   message,
+      //   author,
+      // });
+      vanillaToast.info(`Sorry ${author} this is not coded yet`);
+    }
+  };
 </script>
 
 <div class="main min-h-screen bg-base-200">
@@ -295,7 +306,7 @@
             value={result()}
           />
           <br />
-          <button class="btn btn-primary btn-wide w-full" on:click={copyResult}>
+          <button class="btn btn-primary w-full" on:click={copyResult}>
             Copy result
           </button>
           <p class="text-center">
@@ -316,6 +327,12 @@
               <span class="label-text">Top and bottom margin</span>
             </label>
           </div>
+          <div class="divider" />
+          <p class="text-center">Do you like what you've created?</p>
+          <button
+            class="btn btn-sm btn-secondary w-full"
+            on:click={submitInspiration}>Submit this inspiration</button
+          >
         </div>
       </div>
       <!-- Second column -->

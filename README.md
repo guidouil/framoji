@@ -62,7 +62,8 @@ npm install -g meteor
 * [x] Transparent background
 * [x] Better lines margin
 * [x] Multiple emojis as frame
-* [ ] Make NFT
+* [ ] Submit inspiration propositions
+* [ ] Rate / repport public inspiration propositions
 
 See the [open issues](https://github.com/guidouil/framoji/issues) for a full list of proposed features (and known issues).
 
