@@ -6,8 +6,7 @@
   import GraphemeSplitter from "grapheme-splitter";
 
   import { initializeApp } from "firebase/app";
-  import { getFirestore } from "firebase/firestore/lite";
-  import { ref, set } from "firebase/database";
+  import { getFirestore, collection, addDoc } from "firebase/firestore/lite";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCxfEDdH1fbkRp_VRWTHLRwclxGuXLoYy4",
@@ -247,12 +246,13 @@
   const submitInspiration = () => {
     const author = prompt("What is your name/pseudo?");
     if (author) {
-      // set(ref(db, "inspirations"), {
-      //   emoji,
-      //   message,
-      //   author,
-      // });
-      vanillaToast.info(`Sorry ${author} this is not coded yet`);
+      const docRef = addDoc(collection(db, "inspirations"), {
+        emoji,
+        message,
+        author,
+      });
+      vanillaToast.success("Inspiration submited");
+      console.log(docRef);
     }
   };
 </script>
