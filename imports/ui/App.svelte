@@ -5,6 +5,29 @@
   import copy from "clipboard-copy";
   import GraphemeSplitter from "grapheme-splitter";
 
+  import { initializeApp } from "firebase/app";
+  import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCxfEDdH1fbkRp_VRWTHLRwclxGuXLoYy4",
+    authDomain: "framoji-0.firebaseapp.com",
+    projectId: "framoji-0",
+    storageBucket: "framoji-0.appspot.com",
+    messagingSenderId: "287829073953",
+    appId: "1:287829073953:web:d9185c22baa8e60a994360",
+  };
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  async function getInspirations(db) {
+    const inspirationsCol = collection(db, "inspirations");
+    const inspirationsSnapshot = await getDocs(inspirationsCol);
+    const inspirationsList = inspirationsSnapshot.docs.map((doc) => doc.data());
+    return inspirationsList;
+  }
+  const inspirationspromise = getInspirations(db);
+  console.log(inspirationspromise);
+
   import { inspirations } from "../api/inspirations.js";
 
   import NavBar from "./NavBar.svelte";
