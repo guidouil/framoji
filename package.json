@@ -12,7 +12,6 @@
     "@joeattardi/emoji-button": "^4.6.4",
     "clipboard-copy": "^4.0.1",
     "daisyui": "^2.11.0",
-    "firebase": "^9.6.9",
     "grapheme-splitter": "^1.0.4",
     "meteor-node-stubs": "^1.2.1",
     "postcss": "^8.4.12",

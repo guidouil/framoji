@@ -5,20 +5,6 @@
   import copy from "clipboard-copy";
   import GraphemeSplitter from "grapheme-splitter";
 
-  import { initializeApp } from "firebase/app";
-  import { getFirestore, collection, addDoc } from "firebase/firestore/lite";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCxfEDdH1fbkRp_VRWTHLRwclxGuXLoYy4",
-    authDomain: "framoji-0.firebaseapp.com",
-    projectId: "framoji-0",
-    storageBucket: "framoji-0.appspot.com",
-    messagingSenderId: "287829073953",
-    appId: "1:287829073953:web:d9185c22baa8e60a994360",
-  };
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
   import { inspirations } from "../api/inspirations.js";
 
   import NavBar from "./NavBar.svelte";
@@ -243,19 +229,6 @@
     splitEmojis();
   };
 
-  const submitInspiration = () => {
-    const author = prompt("What is your name/pseudo?");
-    if (author) {
-      const docRef = addDoc(collection(db, "inspirations"), {
-        emoji,
-        message,
-        author,
-      });
-      vanillaToast.success("Inspiration submited");
-      console.log(docRef);
-    }
-  };
-
   const pushEmoji = (additional) => {
     emoji += additional;
     splitEmojis();
@@ -335,12 +308,6 @@
               <span class="label-text">Top and bottom margin</span>
             </label>
           </div>
-          <div class="divider" />
-          <p class="text-center">Do you like what you've created?</p>
-          <button
-            class="btn btn-sm btn-secondary w-full"
-            on:click={submitInspiration}>Submit this inspiration</button
-          >
         </div>
       </div>
       <!-- Second column -->
@@ -381,13 +348,3 @@
   </p>
   <br />
 </div>
-
-<style>
-  tr {
-    cursor: pointer;
-    user-select: none;
-  }
-  .right-floated {
-    float: right;
-  }
-</style>
