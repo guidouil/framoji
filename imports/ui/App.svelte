@@ -255,6 +255,11 @@
       console.log(docRef);
     }
   };
+
+  const pushEmoji = (additional) => {
+    emoji += additional;
+    splitEmojis();
+  };
 </script>
 
 <div class="main min-h-screen bg-base-200">
@@ -284,10 +289,13 @@
             id="emoji"
             placeholder="Frame emojis"
           />
-          <label class="label" for="emoji">
-            <span class="label-text-alt" />
-            <span class="label-text-alt">Try 👇 and ⬇️</span>
-          </label>
+          <div class="btn-group">
+            <button class="btn" on:click={() => pushEmoji("👇")}>👇</button>
+            <button class="btn" on:click={() => pushEmoji("⬇️")}>⬇️</button>
+            <button class="btn" on:click={() => pushEmoji("🔽")}>🔽</button>
+            <button class="btn" on:click={() => pushEmoji("⏬")}>⏬</button>
+            <button class="btn" on:click={() => pushEmoji("⤵️")}>⤵️</button>
+          </div>
           <p class="text-center" />
           <label class="label" for="message">Message in the frame</label>
           <textarea
