@@ -15,7 +15,7 @@ module.exports = {
   // daisyUI config (optional)
   daisyui: {
     styled: true,
-    themes: ["light", "dark"],
+    themes: true,
     base: true,
     utils: true,
     logs: true,

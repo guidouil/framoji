@@ -263,11 +263,21 @@
             placeholder="Frame emojis"
           />
           <div class="btn-group">
-            <button class="btn" on:click={() => pushEmoji("👇")}>👇</button>
-            <button class="btn" on:click={() => pushEmoji("⬇️")}>⬇️</button>
-            <button class="btn" on:click={() => pushEmoji("🔽")}>🔽</button>
-            <button class="btn" on:click={() => pushEmoji("⏬")}>⏬</button>
-            <button class="btn" on:click={() => pushEmoji("⤵️")}>⤵️</button>
+            <button class="btn btn-outline" on:click={() => pushEmoji("👇")}
+              >👇</button
+            >
+            <button class="btn btn-outline" on:click={() => pushEmoji("⬇️")}
+              >⬇️</button
+            >
+            <button class="btn btn-outline" on:click={() => pushEmoji("🔽")}
+              >🔽</button
+            >
+            <button class="btn btn-outline" on:click={() => pushEmoji("⏬")}
+              >⏬</button
+            >
+            <button class="btn btn-outline" on:click={() => pushEmoji("⤵️")}
+              >⤵️</button
+            >
           </div>
           <p class="text-center" />
           <label class="label" for="message">Message in the frame</label>
