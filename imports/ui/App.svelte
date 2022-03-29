@@ -244,7 +244,7 @@
         <div class="md:sticky md:top-0">
           <DeviceDetector showInDevice="desktop">
             <button
-              class="btn btn-circle right-floated text-2xl"
+              class="btn bg-transparent btn-circle right-floated text-2xl border-0"
               id="emoji-trigger"
               on:click={showEmojiPicker}
             >
@@ -358,3 +358,9 @@
   </p>
   <br />
 </div>
+
+<style>
+  .right-floated {
+    float: right;
+  }
+</style>
