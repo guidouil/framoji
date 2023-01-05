@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "allowJs": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "/*": [
+        "./*"
+      ],
+      "meteor/reactive-var": [
+        "/Users/gui/.meteor/packages/reactive-var/1.0.12/web.browser/reactive-var.js"
+      ],
+      "meteor/es5-shim": [
+        "/Users/gui/.meteor/packages/es5-shim/4.8.0/web.browser/client.js",
+        "/Users/gui/.meteor/packages/es5-shim/4.8.0/web.browser/console.js",
+        "/Users/gui/.meteor/packages/es5-shim/4.8.0/web.browser/cordova.js",
+        "/Users/gui/.meteor/packages/es5-shim/4.8.0/web.browser/export_globals.js",
+        "/Users/gui/.meteor/packages/es5-shim/4.8.0/web.browser/import_globals.js"
+      ],
+      "meteor/ecmascript": [
+        "/Users/gui/.meteor/packages/ecmascript/0.16.4/web.browser/ecmascript.js"
+      ],
+      "meteor/shell-server": [
+        "/Users/gui/.meteor/packages/shell-server/0.5.0/web.browser/main.js",
+        "/Users/gui/.meteor/packages/shell-server/0.5.0/web.browser/shell-server.js"
+      ],
+      "meteor/zodern:melte": [
+        "/Users/gui/.meteor/packages/zodern_melte/1.5.2/web.browser/tracker.js",
+        "/Users/gui/.meteor/packages/zodern_melte/1.5.2/web.browser/SvelteCompiler.js",
+        "/Users/gui/.meteor/packages/zodern_melte/1.5.2/web.browser/hmr-runtime.js",
+        "/Users/gui/.meteor/packages/zodern_melte/1.5.2/web.browser/plugin.js",
+        "/Users/gui/.meteor/packages/zodern_melte/1.5.2/web.browser/proxy-adapter.js"
+      ],
+      "meteor/hot-module-replacement": [
+        "/Users/gui/.meteor/packages/hot-module-replacement/0.5.2/web.browser/hot-api.js",
+        "/Users/gui/.meteor/packages/hot-module-replacement/0.5.2/web.browser/client.js",
+        "/Users/gui/.meteor/packages/hot-module-replacement/0.5.2/web.browser/server.js"
+      ]
+    }
+  },
+  "typeAcquisition": {
+    "include": [
+      "meteor"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    ".meteor"
+  ]
+}
